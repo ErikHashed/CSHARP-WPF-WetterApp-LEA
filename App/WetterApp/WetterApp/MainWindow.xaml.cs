@@ -24,6 +24,7 @@ namespace WetterApp
         {
             InitializeComponent();
             MessageBox.Show("teest");
+            MessageBox.Show("hijhgudsajf");
         }
     }
 }
