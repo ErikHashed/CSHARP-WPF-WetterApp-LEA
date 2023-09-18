@@ -23,6 +23,7 @@ namespace WetterApp
         public MainWindow()
         {
             InitializeComponent();
+            MessageBox.Show("teest");
         }
     }
 }
