@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Windows;
 using Newtonsoft.Json.Linq;
+using System.Windows.Controls;
+using System.Windows.Media.Imaging;
 
 namespace WetterApp
 {
@@ -34,13 +37,28 @@ namespace WetterApp
 
                         string beschreibung = data.data[0].weather.description;
                         double temperatur = data.data[0].temp;
+                        string wettername = data.data[0].weather.name;
+                        string uhrzeit = data.data[0].ob_time;
+                        string latte = data.data[0].lat;       //insider Variable
+                        string longschlong = data.data[0].lon; //insider Variable
+                        double windgeschwindigkeit = data.data[0].wind_spd;
+                        string icon = data.data[0].weather.icon;
 
-                        txtErgebnis.Text = $"Beschreibung: {beschreibung}\nTemperatur: {temperatur}°C";
+                        //Viewmodel viewmodel = new Viewmodel();
+                        //viewmodel.ApiString = $"{icon}";
+                        //DataContext = viewmodel;
+
+                        Icons(icon);
+
+                        txtErgebnis.Text =$"Stadt: {stadt} \nBeschreibung: {beschreibung}\nTemperatur: {temperatur}°C \nWettername: {wettername} " +
+                            $"\nUhrzeit: {uhrzeit} Längengrad: {longschlong} Breitengrad: {latte} \n WIndgeschwindigkeit: {windgeschwindigkeit} \n" +
+                            $"Icon: {icon}";
                     }
                     else
                     {
-                        txtErgebnis.Text = "Fehler beim Abrufen der Daten.";
+                        txtErgebnis.Text = "Fehler beim Abrufen der Stadt.";
                     }
+
                 }
             }
             catch (Exception ex)
@@ -48,6 +66,100 @@ namespace WetterApp
                 txtErgebnis.Text = "Fehler beim Abrufen der Daten.";
                 Console.WriteLine(ex.Message);
             }
+
+        }
+        public void Icons(string icon)
+        {
+           Dictionary<string,string> imagePaths = new Dictionary<string, string>
+        {
+            { "a01d", "../../icons/a01d.png" },
+            { "a01n", "../../icons/a01n.png" },
+            { "a02d", "../../icons/a02d.png" },
+            { "a02n", "../../icons/a01d.png" },
+            { "a03d", "../../icons/a01d.png" },
+            { "a03n", "../../icons/a01d.png" },
+            { "a04d", "../../icons/a01d.png" },
+            { "a04n", "../../icons/a01d.png" },
+            { "a05d", "../../icons/a01d.png" },
+            { "a05n", "../../icons/a01d.png" },
+            { "a06d", "../../icons/a01d.png" },
+            { "a06n", "../../icons/a01d.png" },
+
+            { "c01d", "../../icons/a01d.png" },
+            { "c01n", "../../icons/a01d.png" },
+            { "c02d", "../../icons/a01d.png" },
+            { "c02n", "../../icons/a01d.png" },
+            { "c03d", "../../icons/a01d.png" },
+            { "c03n", "../../icons/a01d.png" },
+            { "c04d", "../../icons/a01d.png" },
+            { "c04n", "../../icons/a01d.png" },
+
+            { "d01d", "../../icons/a01d.png" },
+            { "d01n", "../../icons/a01d.png" },
+            { "d02d", "../../icons/a01d.png" },
+            { "d02n", "../../icons/a01d.png" },
+            { "d03d", "../../icons/a01d.png" },
+            { "d03n", "../../icons/a01d.png" },
+
+            { "f01d", "../../icons/a01d.png" },
+            { "f01n", "../../icons/a01d.png" },
+
+            { "r01d", "../../icons/a01d.png" },
+            { "r01n", "../../icons/a01d.png" },
+            { "r02d", "../../icons/a01d.png" },
+            { "r02n", "../../icons/a01d.png" },
+            { "r03d", "../../icons/a01d.png" },
+            { "r03n", "../../icons/a01d.png" },
+            { "r04d", "../../icons/a01d.png" },
+            { "r04n", "../../icons/a01d.png" },
+            { "r05d", "../../icons/a01d.png" },
+            { "r05n", "../../icons/a01d.png" },
+            { "r06d", "../../icons/a01d.png" },
+            { "r06n", "../../icons/a01d.png" },
+
+            { "s01d", "../../icons/a01d.png" },
+            { "s01n", "../../icons/a01d.png" },
+            { "s02d", "../../icons/a01d.png" },
+            { "s02n", "../../icons/a01d.png" },
+            { "s03d", "../../icons/a01d.png" },
+            { "s03n", "../../icons/a01d.png" },
+            { "s04d", "../../icons/a01d.png" },
+            { "s04n", "../../icons/a01d.png" },
+            { "s05d", "../../icons/a01d.png" },
+            { "s05n", "../../icons/a01d.png" },
+            { "s06d", "../../icons/a01d.png" },
+            { "s06n", "../../icons/a01d.png" },
+
+            { "t01d", "../../icons/a01d.png" },
+            { "t01n", "../../icons/a01d.png" },
+            { "t02d", "../../icons/a01d.png" },
+            { "t02n", "../../icons/a01d.png" },
+            { "t03d", "../../icons/a01d.png" },
+            { "t03n", "../../icons/a01d.png" },
+            { "t04d", "../../icons/a01d.png" },
+            { "t04n", "../../icons/a01d.png" },
+            { "t05d", "../../icons/a01d.png" },
+            { "t05n", "../../icons/a01d.png" },
+
+            { "u00d", "../../icons/a01d.png" },
+            { "u00n", "../../icons/a01d.png" },
+            
+
+            // Fügen Sie hier weitere Bildpfade hinzu
+        };
+            string imagepath = $"../../icons/{icon}.png";
+
+            if (imagePaths.ContainsKey(icon))
+            {
+                
+                Bild.Source = new BitmapImage(new Uri(imagepath, UriKind.Relative));
+            }
+            else
+            {
+                // Fallback, wenn kein passender Bildpfad gefunden wurde
+                Bild = null;
+            }
+
         }
     }
 }
