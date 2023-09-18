@@ -6,6 +6,7 @@ using System.Windows;
 using Newtonsoft.Json.Linq;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
+using System.Windows.Media;
 
 namespace WetterApp
 {
@@ -47,8 +48,26 @@ namespace WetterApp
                         //Viewmodel viewmodel = new Viewmodel();
                         //viewmodel.ApiString = $"{icon}";
                         //DataContext = viewmodel;
+                        try
+                        {
+                            MessageBox.Show(icon);
+                            //Icons(icon);
+                            ImageBrush sexxen = new ImageBrush();
 
-                        Icons(icon);
+                            sexxen.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{icon}.png"));
+                            Bild.Fill = sexxen;
+                        }
+                        catch (Exception ex)
+                        {
+
+                            MessageBox.Show(ex.Message);
+                        }
+                        
+                        
+                            //MessageBox.Show(icon);
+                            //Icons(icon);
+                        
+                        
 
                         txtErgebnis.Text =$"Stadt: {stadt} \nBeschreibung: {beschreibung}\nTemperatur: {temperatur}°C \nWettername: {wettername} " +
                             $"\nUhrzeit: {uhrzeit} Längengrad: {longschlong} Breitengrad: {latte} \n WIndgeschwindigkeit: {windgeschwindigkeit} \n" +
@@ -149,17 +168,17 @@ namespace WetterApp
         };
             string imagepath = $"../../icons/{icon}.png";
 
-            if (imagePaths.ContainsKey(icon))
-            {
-                
-                Bild.Source = new BitmapImage(new Uri(imagepath, UriKind.Relative));
-            }
-            else
-            {
-                // Fallback, wenn kein passender Bildpfad gefunden wurde
-                Bild = null;
-            }
-
+            //if (imagePaths.ContainsKey(icon))
+            //{
+            //    string ausgabe = imagePaths[icon];   
+            //    Bild.Source = new BitmapImage(new Uri(ausgabe, UriKind.Relative));
+            //}
+            //else
+            //{
+            //    // Fallback, wenn kein passender Bildpfad gefunden wurde
+            //    Bild = null;
+            //}
+            
         }
     }
 }

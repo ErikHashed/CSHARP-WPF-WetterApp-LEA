@@ -9,7 +9,9 @@
             <Button Content="Suchen" Click="Suchen_Click" Width="100" Margin="0,10" />
             <TextBlock x:Name="txtErgebnis" Margin="0,20" />
             <Label x:Name="txtLang" />
-            <Image x:Name="Bild" Width="33" Height="23"/>
+
         </StackPanel>
+        <!--<Image x:Name="Bild" Margin="93,232,350,39" Source="/Screenshot (1).png" />-->
+        <Rectangle x:Name="Bild" Margin="102,233,264,35"> </Rectangle>
     </Grid>
 </Window>

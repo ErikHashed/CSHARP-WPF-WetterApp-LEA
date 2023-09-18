@@ -100,7 +100,73 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="icons\" />
+    <Resource Include="Screenshot %281%29.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\a01d.png" />
+    <Resource Include="images\a01n.png" />
+    <Resource Include="images\a02d.png" />
+    <Resource Include="images\a02n.png" />
+    <Resource Include="images\a03d.png" />
+    <Resource Include="images\a03n.png" />
+    <Resource Include="images\a04d.png" />
+    <Resource Include="images\a04n.png" />
+    <Resource Include="images\a05d.png" />
+    <Resource Include="images\a05n.png" />
+    <Resource Include="images\a06d.png" />
+    <Resource Include="images\a06n.png" />
+    <Resource Include="images\c01d.png" />
+    <Resource Include="images\c01n.png" />
+    <Resource Include="images\c02d.png" />
+    <Resource Include="images\c02n.png" />
+    <Resource Include="images\c03d.png" />
+    <Resource Include="images\c03n.png" />
+    <Resource Include="images\c04d.png" />
+    <Resource Include="images\c04n.png" />
+    <Resource Include="images\d01d.png" />
+    <Resource Include="images\d01n.png" />
+    <Resource Include="images\d02d.png" />
+    <Resource Include="images\d02n.png" />
+    <Resource Include="images\d03d.png" />
+    <Resource Include="images\d03n.png" />
+    <Resource Include="images\f01d.png" />
+    <Resource Include="images\f01n.png" />
+    <Resource Include="images\r01d.png" />
+    <Resource Include="images\r01n.png" />
+    <Resource Include="images\r02d.png" />
+    <Resource Include="images\r02n.png" />
+    <Resource Include="images\r03d.png" />
+    <Resource Include="images\r03n.png" />
+    <Resource Include="images\r04d.png" />
+    <Resource Include="images\r04n.png" />
+    <Resource Include="images\r05d.png" />
+    <Resource Include="images\r05n.png" />
+    <Resource Include="images\r06d.png" />
+    <Resource Include="images\r06n.png" />
+    <Resource Include="images\s01d.png" />
+    <Resource Include="images\s01n.png" />
+    <Resource Include="images\s02d.png" />
+    <Resource Include="images\s02n.png" />
+    <Resource Include="images\s03d.png" />
+    <Resource Include="images\s03n.png" />
+    <Resource Include="images\s04d.png" />
+    <Resource Include="images\s04n.png" />
+    <Resource Include="images\s05d.png" />
+    <Resource Include="images\s05n.png" />
+    <Resource Include="images\s06d.png" />
+    <Resource Include="images\s06n.png" />
+    <Resource Include="images\t01d.png" />
+    <Resource Include="images\t01n.png" />
+    <Resource Include="images\t02d.png" />
+    <Resource Include="images\t02n.png" />
+    <Resource Include="images\t03d.png" />
+    <Resource Include="images\t03n.png" />
+    <Resource Include="images\t04d.png" />
+    <Resource Include="images\t04n.png" />
+    <Resource Include="images\t05d.png" />
+    <Resource Include="images\t05n.png" />
+    <Resource Include="images\u00d.png" />
+    <Resource Include="images\u00n.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
