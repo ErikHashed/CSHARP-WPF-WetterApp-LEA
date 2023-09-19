@@ -14,6 +14,7 @@ using System.Data;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using System.Threading;
+using System.Windows.Markup;
 
 namespace WetterApp
 {
@@ -22,7 +23,7 @@ namespace WetterApp
     {
        
         private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
-        private Timer timer;
+        
 
         public MainWindow()
         {
@@ -34,6 +35,14 @@ namespace WetterApp
 
             string stadt = txtStadt.Text;
             string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={stadt}&key={apiKey}&lang=de";
+
+            await Unwetter(stadt);
+
+
+
+           
+
+
 
             try
             {
@@ -54,8 +63,10 @@ namespace WetterApp
                         string longschlong = data.data[0].lon; //insider Variable
                         double windgeschwindigkeit = data.data[0].wind_spd;
                         string icon = data.data[0].weather.icon;
-
-                        Unwetter(stadt);
+                       
+                           
+                        
+                        
 
                         //Viewmodel viewmodel = new Viewmodel();
                         //viewmodel.ApiString = $"{icon}";
@@ -100,7 +111,7 @@ namespace WetterApp
 
         }
 
-        private async void Unwetter (string city)
+        private async Task Unwetter (string city)
         {
 
             string url = $"https://api.weatherbit.io/v2.0/alerts?city={city}&key={apiKey}";
@@ -116,8 +127,18 @@ namespace WetterApp
 						string json = await response.Content.ReadAsStringAsync();
 						dynamic data = JObject.Parse(json);
 
-                        string unweatherName = data.data[0].title;
-                        unweatherTextBox.Text = unweatherName;
+
+                        if (data?.data != null && data.data.Count > 0)
+                        {
+                            string unweatherName = data.data[0].title;
+                            unweatherTextBox.Text = unweatherName;
+                            MessageBox.Show("Wir haben DAAAATEEEEEN");
+                        }
+
+
+
+                        //string unweatherName = data.data[0].title;
+                        //unweatherTextBox.Text = unweatherName;
 					}
 				}
             } catch (Exception ex)
