@@ -62,7 +62,6 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="UnwetterWarnung.cs" />
-    <Compile Include="Viewmodel.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -26,9 +26,7 @@ namespace WetterApp
 
         public MainWindow()
         {
-            InitializeComponent();
-            IrgendeineMethode();
-            
+            InitializeComponent();            
         }
 
         private async void Suchen_Click(object sender, RoutedEventArgs e)
@@ -56,6 +54,8 @@ namespace WetterApp
                         string longschlong = data.data[0].lon; //insider Variable
                         double windgeschwindigkeit = data.data[0].wind_spd;
                         string icon = data.data[0].weather.icon;
+
+                        Unwetter(stadt);
 
                         //Viewmodel viewmodel = new Viewmodel();
                         //viewmodel.ApiString = $"{icon}";
@@ -100,26 +100,32 @@ namespace WetterApp
 
         }
 
-        public async void IrgendeineMethode()
+        private async void Unwetter (string city)
         {
-            UnwetterWarnung manager = new UnwetterWarnung();
-            List<UnwetterWarnung> warnungen = await manager.GetUnwetterWarnungen();
-            // Jetzt hast du die Unwetterwarnungen und kannst damit weiterarbeiten
-        }
 
-        public void TimerBeispiel()
-        {
-            // Initialisiere den Timer. Der TimerCallback ist die Methode, die aufgerufen wird.
-            timer = new Timer(TimerCallback, null, 0, 5000); // 5000 Millisekunden = 5 Sekunden
-        }
+            string url = $"https://api.weatherbit.io/v2.0/alerts?city={city}&key={apiKey}";
 
-        private void TimerCallback(object o)
-        {
-            // Diese Methode wird alle 5 Sekunden aufgerufen
-            Console.WriteLine("Timer ausgelöst!");
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+					HttpResponseMessage response = await client.GetAsync(url);
 
-            // Hier kannst du deine eigene Methode aufrufen
-            IrgendeineMethode();
+                    if(response.IsSuccessStatusCode)
+                    {
+						string json = await response.Content.ReadAsStringAsync();
+						dynamic data = JObject.Parse(json);
+
+                        string unweatherName = data.data[0].title;
+                        unweatherTextBox.Text = unweatherName;
+					}
+				}
+            } catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+
         }
 
 

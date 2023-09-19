@@ -15,5 +15,6 @@
         </StackPanel>
         <!--<Image x:Name="Bild" Margin="93,232,350,39" Source="/Screenshot (1).png" />-->
         <Rectangle x:Name="Bild" Margin="116,234,289,50"> </Rectangle>
+        <TextBox x:Name="unweatherTextBox" HorizontalAlignment="Left" Height="50" Margin="402,284,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="74"/>
     </Grid>
 </Window>
