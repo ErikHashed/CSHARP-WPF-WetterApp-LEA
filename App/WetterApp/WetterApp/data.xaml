@@ -1,0 +1,14 @@
+﻿<Window x:Class="WetterApp.data"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WetterApp"
+        mc:Ignorable="d"
+        Title="data" Height="450" Width="800">
+    <Grid>
+        <Rectangle x:Name="weatherImage" Width="120" Height="120" Margin="555,157,125,157"/>
+        <TextBlock x:Name="txtErgebnis" HorizontalAlignment="Left" Margin="123,0,0,0" VerticalAlignment="Center" Height="192" Width="327"/>
+
+    </Grid>
+</Window>

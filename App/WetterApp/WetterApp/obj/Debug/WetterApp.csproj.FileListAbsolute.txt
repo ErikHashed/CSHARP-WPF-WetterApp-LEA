@@ -55,3 +55,25 @@ C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\We
 C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\WetterApp.exe
 C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\WetterApp.pdb
 \\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\ToastNotifications.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\Microsoft.Win32.Registry.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Buffers.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Device.Gpio.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Device.Portable.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Memory.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Numerics.Vectors.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Security.AccessControl.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Security.Principal.Windows.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\Microsoft.Win32.Registry.xml
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Buffers.xml
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Device.Gpio.xml
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Memory.xml
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Numerics.Vectors.xml
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Security.AccessControl.xml
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Security.Principal.Windows.xml
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\data.g.cs
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\WetterApp_MarkupCompile.lref
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\data.baml
