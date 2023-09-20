@@ -77,3 +77,27 @@ C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\Sy
 C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\data.g.cs
 C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\WetterApp_MarkupCompile.lref
 C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\data.baml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\data.g.cs
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\WetterApp_MarkupCompile.lref
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\Microsoft.Win32.Registry.dll
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Buffers.dll
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Device.Gpio.dll
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Device.Portable.dll
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Memory.dll
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Numerics.Vectors.dll
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Security.AccessControl.dll
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Security.Principal.Windows.dll
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Threading.Tasks.Extensions.dll
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\Microsoft.Win32.Registry.xml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Buffers.xml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Device.Gpio.xml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Memory.xml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Numerics.Vectors.xml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Security.AccessControl.xml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Security.Principal.Windows.xml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\bin\Debug\System.Threading.Tasks.Extensions.xml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\data.baml
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\InputDialog.g.cs
+\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\InputDialog.baml

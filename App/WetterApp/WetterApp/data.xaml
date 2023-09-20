@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WetterApp"
         mc:Ignorable="d"
-        Title="data" Height="450" Width="800">
+        Title="daten" Height="450" Width="800">
     <Grid>
         <Rectangle x:Name="weatherImage" Width="120" Height="120" Margin="555,157,125,157"/>
         <TextBlock x:Name="txtErgebnis" HorizontalAlignment="Left" Margin="123,0,0,0" VerticalAlignment="Center" Height="192" Width="327"/>

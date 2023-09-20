@@ -35,7 +35,7 @@ namespace WetterApp
 
 			string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang=de";
 
-			
+
 			try
 			{
 				using (HttpClient client = new HttpClient())
@@ -103,141 +103,45 @@ namespace WetterApp
 
 		}
 
-		//    private async Task Unwetter (string city)
-		//    {
+		private async Task Unwetter(string city)
+		{
 
-		//        string url = $"https://api.weatherbit.io/v2.0/alerts?city={city}&key={apiKey}";
+			string url = $"https://api.weatherbit.io/v2.0/alerts?city={city}&key={apiKey}";
 
-		//        try
-		//        {
-		//            using (HttpClient client = new HttpClient())
-		//            {
-		//	HttpResponseMessage response = await client.GetAsync(url);
+			try
+			{
+				using (HttpClient client = new HttpClient())
+				{
+					HttpResponseMessage response = await client.GetAsync(url);
 
-		//                if(response.IsSuccessStatusCode)
-		//                {
-		//		string json = await response.Content.ReadAsStringAsync();
-		//		dynamic data = JObject.Parse(json);
-
-
-		//                    if (data?.data != null && data.data.Count > 0)
-		//                    {
-		//                        string unweatherName = data.data[0].title;
-		//                        //unweatherTextBox.Text = unweatherName;
-		//                        MessageBox.Show("Wir haben DAAAATEEEEEN");
-		//                    }
+					if (response.IsSuccessStatusCode)
+					{
+						string jsonn = await response.Content.ReadAsStringAsync();
+						dynamic data = JObject.Parse(jsonn);
 
 
-
-		//                    //string unweatherName = data.data[0].title;
-		//                    //unweatherTextBox.Text = unweatherName;
-		//	}
-		//}
-		//        } catch (Exception ex)
-		//        {
-		//            MessageBox.Show(ex.Message);
-		//        }
-
-
-		//    }
-
-
-		//public void Icons(string icon)
-		//{
-		//   Dictionary<string,string> imagePaths = new Dictionary<string, string>
-		//{
-		//    { "a01d", "../../icons/a01d.png" },
-		//    { "a01n", "../../icons/a01n.png" },
-		//    { "a02d", "../../icons/a02d.png" },
-		//    { "a02n", "../../icons/a01d.png" },
-		//    { "a03d", "../../icons/a01d.png" },
-		//    { "a03n", "../../icons/a01d.png" },
-		//    { "a04d", "../../icons/a01d.png" },
-		//    { "a04n", "../../icons/a01d.png" },
-		//    { "a05d", "../../icons/a01d.png" },
-		//    { "a05n", "../../icons/a01d.png" },
-		//    { "a06d", "../../icons/a01d.png" },
-		//    { "a06n", "../../icons/a01d.png" },
-
-		//    { "c01d", "../../icons/a01d.png" },
-		//    { "c01n", "../../icons/a01d.png" },
-		//    { "c02d", "../../icons/a01d.png" },
-		//    { "c02n", "../../icons/a01d.png" },
-		//    { "c03d", "../../icons/a01d.png" },
-		//    { "c03n", "../../icons/a01d.png" },
-		//    { "c04d", "../../icons/a01d.png" },
-		//    { "c04n", "../../icons/a01d.png" },
-
-		//    { "d01d", "../../icons/a01d.png" },
-		//    { "d01n", "../../icons/a01d.png" },
-		//    { "d02d", "../../icons/a01d.png" },
-		//    { "d02n", "../../icons/a01d.png" },
-		//    { "d03d", "../../icons/a01d.png" },
-		//    { "d03n", "../../icons/a01d.png" },
-
-		//    { "f01d", "../../icons/a01d.png" },
-		//    { "f01n", "../../icons/a01d.png" },
-
-		//    { "r01d", "../../icons/a01d.png" },
-		//    { "r01n", "../../icons/a01d.png" },
-		//    { "r02d", "../../icons/a01d.png" },
-		//    { "r02n", "../../icons/a01d.png" },
-		//    { "r03d", "../../icons/a01d.png" },
-		//    { "r03n", "../../icons/a01d.png" },
-		//    { "r04d", "../../icons/a01d.png" },
-		//    { "r04n", "../../icons/a01d.png" },
-		//    { "r05d", "../../icons/a01d.png" },
-		//    { "r05n", "../../icons/a01d.png" },
-		//    { "r06d", "../../icons/a01d.png" },
-		//    { "r06n", "../../icons/a01d.png" },
-
-		//    { "s01d", "../../icons/a01d.png" },
-		//    { "s01n", "../../icons/a01d.png" },
-		//    { "s02d", "../../icons/a01d.png" },
-		//    { "s02n", "../../icons/a01d.png" },
-		//    { "s03d", "../../icons/a01d.png" },
-		//    { "s03n", "../../icons/a01d.png" },
-		//    { "s04d", "../../icons/a01d.png" },
-		//    { "s04n", "../../icons/a01d.png" },
-		//    { "s05d", "../../icons/a01d.png" },
-		//    { "s05n", "../../icons/a01d.png" },
-		//    { "s06d", "../../icons/a01d.png" },
-		//    { "s06n", "../../icons/a01d.png" },
-
-		//    { "t01d", "../../icons/a01d.png" },
-		//    { "t01n", "../../icons/a01d.png" },
-		//    { "t02d", "../../icons/a01d.png" },
-		//    { "t02n", "../../icons/a01d.png" },
-		//    { "t03d", "../../icons/a01d.png" },
-		//    { "t03n", "../../icons/a01d.png" },
-		//    { "t04d", "../../icons/a01d.png" },
-		//    { "t04n", "../../icons/a01d.png" },
-		//    { "t05d", "../../icons/a01d.png" },
-		//    { "t05n", "../../icons/a01d.png" },
-
-		//    { "u00d", "../../icons/a01d.png" },
-		//    { "u00n", "../../icons/a01d.png" },
-
-
-		//    // Fügen Sie hier weitere Bildpfade hinzu
-		//};
-		//    string imagepath = $"../../icons/{icon}.png";
-
-		//    //if (imagePaths.ContainsKey(icon))
-		//    //{
-		//    //    string ausgabe = imagePaths[icon];   
-		//    //    Bild.Source = new BitmapImage(new Uri(ausgabe, UriKind.Relative));
-		//    //}
-		//    //else
-		//    //{
-		//    //    // Fallback, wenn kein passender Bildpfad gefunden wurde
-		//    //    Bild = null;
-		//    //}
-
-		//}
+						if (data?.dataa != null && data.Count > 0)
+						{
+							string unweatherName = data[0].title;
+							//unweatherTextBox.Text = unweatherName;
+							MessageBox.Show("Wir haben DAAAATEEEEEN");
+						}
 
 
 
+						//string unweatherName = data.data[0].title;
+						//unweatherTextBox.Text = unweatherName;
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
 
-	}
-}
+
+
+		}
+				}
+			}
+			
