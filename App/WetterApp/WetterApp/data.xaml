@@ -15,8 +15,8 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Text="{Binding}" Margin="0 0 10 0"/>
-                        <Image Tag="{Binding ImageSource}" Width="60" Height="60" Margin="10 0 0 0"/>
+                        <TextBlock Text="{Binding Temperature}" Margin="0 0 10 0"/>
+                        <Image Tag="{Binding IconPath}" Width="60" Height="60" Margin="10 0 0 0"/>
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

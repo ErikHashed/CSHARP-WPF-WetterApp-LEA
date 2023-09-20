@@ -97,13 +97,24 @@ namespace WetterApp
 						//int maxTemp = data.data[0].max_temp;
 
 
-						forecastList.Items.Add(data.data[0].min_temp + " / " + data.data[0].max_temp);
-						forecastList.Items.Add(data.data[1].min_temp + " / " + data.data[1].max_temp);
-						forecastList.Items.Add(data.data[2].min_temp + " / " + data.data[2].max_temp);
-						forecastList.Items.Add(data.data[3].min_temp + " / " + data.data[3].max_temp);
-						forecastList.Items.Add(data.data[4].min_temp + " / " + data.data[4].max_temp);
+						//forecastList.Items.Add(data.data[0].min_temp + " / " + data.data[0].max_temp);
+						//forecastList.Items.Add(data.data[1].min_temp + " / " + data.data[1].max_temp);
+						//forecastList.Items.Add(data.data[2].min_temp + " / " + data.data[2].max_temp);
+						//forecastList.Items.Add(data.data[3].min_temp + " / " + data.data[3].max_temp);
+						//forecastList.Items.Add(data.data[4].min_temp + " / " + data.data[4].max_temp);
 
-
+						try
+						{
+							Image image = new Image();
+							BitmapImage bi = new BitmapImage(new Uri(($"pack://application:,,,/images/{data.data[0].weather.icon}.png")));
+							image.Source = bi;
+							forecastList.Items.Add(new ViewModel($"{data.data[0].min_temp} / {data.data[0].max_temp}", image));
+						}
+						catch (Exception ex)
+						{
+							MessageBox.Show(ex.Message);
+						}
+						
 
 						//txtMinMax.Text = maxTemp + "°/" + minTemp+ "°";
 					}
@@ -111,7 +122,7 @@ namespace WetterApp
 			}
 			catch (Exception ex)
 			{
-				
+				MessageBox.Show(ex.Message);
 			}
 		}
 
@@ -157,5 +168,16 @@ namespace WetterApp
 
 	}
 
+	class ViewModel
+	{
+		public string Temperature { get; set; }
+		public Image Icon { get; set; }
+
+		public ViewModel(string temperature, Image icon)
+		{
+			Temperature = temperature;
+			Icon = icon;
+		}
+	}
 }
 			
