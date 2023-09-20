@@ -60,18 +60,8 @@ namespace WetterApp
 						double windgeschwindigkeit = data.data[0].wind_spd;
 						string icon = data.data[0].weather.icon;
 
-
-
-
-
-
-						//Viewmodel viewmodel = new Viewmodel();
-						//viewmodel.ApiString = $"{icon}";
-						//DataContext = viewmodel;
 						try
 						{
-
-
 							ImageBrush sexxen = new ImageBrush();
 
 							sexxen.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{icon}.png"));
@@ -79,13 +69,8 @@ namespace WetterApp
 						}
 						catch (Exception ex)
 						{
-
 							MessageBox.Show(ex.Message);
 						}
-
-
-						//MessageBox.Show(icon);
-						//Icons(icon);
 
 						txtTemp.Text = temperatur + "°C";
 
@@ -96,11 +81,6 @@ namespace WetterApp
 					{
 						//txtErgebnis.Text = "Fehler beim Abrufen der Stadt.";
 					}
-
-
-
-
-
 
 				}
 				using (HttpClient client = new HttpClient())
@@ -113,27 +93,27 @@ namespace WetterApp
 						dynamic data = JObject.Parse(json);
 
 
-
-						int minTemp = data.data[0].min_temp;
-						int maxTemp = data.data[0].max_temp;
-
-						txtMinMax.Text = maxTemp + "°/" + minTemp+ "°";
+						//int minTemp = data.data[0].min_temp;
+						//int maxTemp = data.data[0].max_temp;
 
 
-                    }
-					
+						forecastList.Items.Add(data.data[0].min_temp + " / " + data.data[0].max_temp);
+						forecastList.Items.Add(data.data[1].min_temp + " / " + data.data[1].max_temp);
+						forecastList.Items.Add(data.data[2].min_temp + " / " + data.data[2].max_temp);
+						forecastList.Items.Add(data.data[3].min_temp + " / " + data.data[3].max_temp);
+						forecastList.Items.Add(data.data[4].min_temp + " / " + data.data[4].max_temp);
 
 
+
+						//txtMinMax.Text = maxTemp + "°/" + minTemp+ "°";
+					}
 				}
-
-
-
 			}
 			catch (Exception ex)
 			{
 				
 			}
-			}
+		}
 
 		private async Task Unwetter(string city)
 		{
@@ -174,6 +154,8 @@ namespace WetterApp
 
 
 		}
-				}
-			}
+
+	}
+
+}
 			
