@@ -103,12 +103,23 @@ namespace WetterApp
 						forecastList.Items.Add(data.data[4].min_temp + " / " + data.data[4].max_temp);
                         try
                         {
-                            ImageBrush sexxen = new ImageBrush();
+                            ImageBrush img1 = new ImageBrush();
+							ImageBrush img2 = new ImageBrush();
+							ImageBrush img3 = new ImageBrush();
+							ImageBrush img4 = new ImageBrush();
+							ImageBrush img5 = new ImageBrush();
 
-                            sexxen.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png"));
-                            weatherIcon.Fill = sexxen;
-                            weatherIcon2.Fill = sexxen;
-                        }
+							img1.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png"));
+							img2.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[1].weather.icon}.png"));
+							img3.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[2].weather.icon}.png"));
+							img4.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[3].weather.icon}.png"));
+							img5.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[4].weather.icon}.png"));
+							weatherIcon1.Fill = img1;
+                            weatherIcon2.Fill = img2;
+							weatherIcon3.Fill = img3;
+							weatherIcon4.Fill = img4;
+							weatherIcon5.Fill = img5;
+						}
                         catch (Exception ex)
                         {
                             MessageBox.Show(ex.Message);
