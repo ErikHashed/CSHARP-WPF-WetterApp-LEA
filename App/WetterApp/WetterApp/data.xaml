@@ -7,8 +7,10 @@
         mc:Ignorable="d"
         Title="daten" Height="450" Width="800">
     <Grid>
-        <Rectangle x:Name="weatherImage" Width="120" Height="120" Margin="555,157,125,157"/>
-        <TextBlock x:Name="txtErgebnis" HorizontalAlignment="Left" Margin="123,0,0,0" VerticalAlignment="Center" Height="192" Width="327"/>
-
+        <Rectangle x:Name="weatherImage" Height="120" Margin="251,10,297,304"/>
+        <!--<TextBlock x:Name="txtErgebnis" HorizontalAlignment="Left" Margin="123,0,0,0" VerticalAlignment="Center" Height="192" Width="327"/>-->
+        <TextBlock x:Name="txtTemp" Margin="339,135,0,0" FontSize="24" HorizontalAlignment="Left" Width="252" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txtMinMax" Margin="339,172,255,217" FontSize="16"></TextBlock>
+        <ListBox d:ItemsSource="{d:SampleData ItemCount=5}" Margin="251,243,0,10" HorizontalAlignment="Left" Width="344" FontSize="24"/>
     </Grid>
 </Window>

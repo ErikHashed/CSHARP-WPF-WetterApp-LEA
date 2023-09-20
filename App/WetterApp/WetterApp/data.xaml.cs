@@ -31,10 +31,12 @@ namespace WetterApp
 
 		private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
 
+
 		private async void GetInformation(string city)
 		{
 
 			string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang=de";
+			string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={city}&key={apiKey}";
 
 
 			try
@@ -43,19 +45,21 @@ namespace WetterApp
 				{
 					HttpResponseMessage response = await client.GetAsync(apiUrl);
 
+
 					if (response.IsSuccessStatusCode)
 					{
 						string json = await response.Content.ReadAsStringAsync();
 						dynamic data = JObject.Parse(json);
 
 						string beschreibung = data.data[0].weather.description;
-						double temperatur = data.data[0].temp;
+						int temperatur = data.data[0].temp;
 						string wettername = data.data[0].weather.name;
 						string uhrzeit = data.data[0].ob_time;
 						string latte = data.data[0].lat;       //insider Variable
 						string longschlong = data.data[0].lon; //insider Variable
 						double windgeschwindigkeit = data.data[0].wind_spd;
 						string icon = data.data[0].weather.icon;
+
 
 
 
@@ -83,26 +87,53 @@ namespace WetterApp
 						//MessageBox.Show(icon);
 						//Icons(icon);
 
+						txtTemp.Text = temperatur + "°C";
 
-
-						txtErgebnis.Text = $"Stadt: {city} \nBeschreibung: {beschreibung}\nTemperatur: {temperatur}°C \nWettername: {wettername} " +
-							$"\nUhrzeit: {uhrzeit} Längengrad: {longschlong} Breitengrad: {latte} \n Windgeschwindigkeit: {windgeschwindigkeit} \n";
-					}
+                        //txtErgebnis.Text = $"Stadt: {city} \nBeschreibung: {beschreibung}\nTemperatur: {temperatur}°C \nWettername: {wettername} " +
+                        //$"\nUhrzeit: {uhrzeit} Längengrad: {longschlong} Breitengrad: {latte} \n Windgeschwindigkeit: {windgeschwindigkeit} \n";
+                    }
 					else
 					{
-						txtErgebnis.Text = "Fehler beim Abrufen der Stadt.";
+						//txtErgebnis.Text = "Fehler beim Abrufen der Stadt.";
 					}
 
+
+
+
+
+
 				}
+				using (HttpClient client = new HttpClient())
+				{
+					HttpResponseMessage responseForecast = await client.GetAsync(forecastUrl);
+					if (responseForecast.IsSuccessStatusCode)
+					{
+
+						string json = await responseForecast.Content.ReadAsStringAsync();
+						dynamic data = JObject.Parse(json);
+
+
+
+						int minTemp = data.data[0].min_temp;
+						int maxTemp = data.data[0].max_temp;
+
+						txtMinMax.Text = maxTemp + "°/" + minTemp+ "°";
+
+
+                    }
+					
+
+
+				}
+
+
+
 			}
 			catch (Exception ex)
 			{
-				txtErgebnis.Text = "Fehler beim Abrufen der Daten.";
-				Console.WriteLine(ex.Message);
+				
 			}
-
-
-		}
+			}
 
 		private async Task Unwetter(string city)
 		{
