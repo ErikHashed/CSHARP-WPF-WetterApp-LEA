@@ -19,7 +19,7 @@ namespace WetterApp
     /// </summary>
     public partial class InputDialog : Window
     {
-        public string UserInput { get; private set; }
+        public string UserInput { get; set; }
 
         public InputDialog()
         {

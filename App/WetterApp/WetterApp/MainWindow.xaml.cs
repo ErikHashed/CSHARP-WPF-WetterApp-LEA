@@ -23,6 +23,7 @@ namespace WetterApp
     public partial class MainWindow : Window
     {
         private string selectedCity = null;
+        public string name = null;
         public MainWindow()
         {
             InitializeComponent();
@@ -41,7 +42,7 @@ namespace WetterApp
             InputDialog inputDialog = new InputDialog();
             inputDialog.ShowDialog();
 
-            string name = inputDialog.UserInput;
+            name = inputDialog.UserInput;
 
             if (!string.IsNullOrEmpty(name))
             {
@@ -51,6 +52,7 @@ namespace WetterApp
                     Height = 280,
                     Fill = Brushes.LightBlue,
                     HorizontalAlignment = HorizontalAlignment.Right,
+                    Name = name,
                     
                 };
 
@@ -86,8 +88,7 @@ namespace WetterApp
 
                 }
                 catch (Exception ex)
-                {
-                   
+                { 
                     
                 }
                
@@ -105,8 +106,8 @@ namespace WetterApp
 
 
 
-            data window = new data(selectedCity);
-                window.Show();
+            data window = new data(clickedRectangle.Name);
+            window.Show();
 
 
             

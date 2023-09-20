@@ -25,6 +25,7 @@ namespace WetterApp
 		{
 			InitializeComponent();
 
+
 			GetInformation(city);
 		}
 
