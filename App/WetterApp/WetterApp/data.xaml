@@ -16,12 +16,12 @@
         <!--<TextBlock x:Name="txtErgebnis" HorizontalAlignment="Left" Margin="123,0,0,0" VerticalAlignment="Center" Height="192" Width="327"/>-->
         <TextBlock x:Name="txtTemp" Margin="252,134,0,0" FontSize="24" HorizontalAlignment="Left" Width="252" VerticalAlignment="Top"/>
         <TextBlock x:Name="txtMinMax" Margin="252,166,342,223" FontSize="16"></TextBlock>
-        <ListBox x:Name="forecastList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="562,104,0,0" HorizontalAlignment="Left" Width="238" FontSize="20">
+        <ListBox x:Name="weatherforecastList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="562,104,0,0" HorizontalAlignment="Left" Width="238" FontSize="20">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{Binding Temperature}" Margin="0 0 10 0"/>
-                        <Image Tag="{Binding IconPath}" Width="60" Height="60" Margin="10 0 0 0"/>
+                        <Image Source="{Binding IconPath}"  Width="60" Height="60" Margin="10 0 0 0"/>
                     </StackPanel>
                 </DataTemplate>
 

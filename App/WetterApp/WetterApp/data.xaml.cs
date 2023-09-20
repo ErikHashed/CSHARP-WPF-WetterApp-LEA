@@ -39,7 +39,10 @@ namespace WetterApp
 			string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={city}&key={apiKey}";
 
 
-			try
+
+           
+
+            try
 			{
 				using (HttpClient client = new HttpClient())
 				{
@@ -60,19 +63,29 @@ namespace WetterApp
 						double windgeschwindigkeit = data.data[0].wind_spd;
 						string icon = data.data[0].weather.icon;
 
-						try
-						{
+						
 							ImageBrush sexxen = new ImageBrush();
 
 							sexxen.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{icon}.png"));
 							weatherImage.Fill = sexxen;
-						}
-						catch (Exception ex)
-						{
-							MessageBox.Show(ex.Message);
-						}
 
-						txtTemp.Text = temperatur + "°C";
+
+
+                        List<WeatherForecast> forecasts = new List<WeatherForecast>();
+
+                      
+                        forecasts.Add(new WeatherForecast
+                        {
+                            Temperature = $"{data.data[0].min_temp} / {data.data[0].max_temp}",
+                            IconPath = $"pack://application:,,,/images/{data.data[0].weather.icon}.png"
+                        });
+
+
+                       // weatherforecastList.ItemsSource = forecasts;
+
+
+
+                        txtTemp.Text = temperatur + "°C";
 
                         //txtErgebnis.Text = $"Stadt: {city} \nBeschreibung: {beschreibung}\nTemperatur: {temperatur}°C \nWettername: {wettername} " +
                         //$"\nUhrzeit: {uhrzeit} Längengrad: {longschlong} Breitengrad: {latte} \n Windgeschwindigkeit: {windgeschwindigkeit} \n";
@@ -96,23 +109,47 @@ namespace WetterApp
 							string json = await responseForecast.Content.ReadAsStringAsync();
 							dynamic data = JObject.Parse(json);
 
-						try
-						{
+                    
 
-							forecastList.Items.Add(data.data[0].min_temp + " / " + data.data[0].max_temp);
-							forecastList.Items.Add(data.data[1].min_temp + " / " + data.data[1].max_temp);
-							forecastList.Items.Add(data.data[2].min_temp + " / " + data.data[2].max_temp);
-							forecastList.Items.Add(data.data[3].min_temp + " / " + data.data[3].max_temp);
-							forecastList.Items.Add(data.data[4].min_temp + " / " + data.data[4].max_temp);
-						}
 
-						catch (Exception ex)
-						{
+                        List<WeatherForecast> forecasts = new List<WeatherForecast>();
 
-							MessageBox.Show(ex.Message);
-						}
+
+                        forecasts.Add(new WeatherForecast
+                        {
+                            Temperature = $"{data.data[0].min_temp} / {data.data[0].max_temp}",
+                            IconPath = $"pack://application:,,,/images/{data.data[0].weather.icon}.png"
+                        });
+
+                        forecasts.Add(new WeatherForecast
+                        {
+                            Temperature = $"{data.data[1].min_temp} / {data.data[1].max_temp}",
+                            IconPath = $"pack://application:,,,/images/{data.data[1].weather.icon}.png"
+                        });
+
+                        forecasts.Add(new WeatherForecast
+                        {
+                            Temperature = $"{data.data[2].min_temp} / {data.data[2].max_temp}",
+                            IconPath = $"pack://application:,,,/images/{data.data[2].weather.icon}.png"
+                        });
+
+                        forecasts.Add(new WeatherForecast
+                        {
+                            Temperature = $"{data.data[3].min_temp} / {data.data[3].max_temp}",
+                            IconPath = $"pack://application:,,,/images/{data.data[3].weather.icon}.png"
+                        });
+
+                        forecasts.Add(new WeatherForecast
+                        {
+                            Temperature = $"{data.data[4].min_temp} / {data.data[4].max_temp}",
+                            IconPath = $"pack://application:,,,/images/{data.data[4].weather.icon}.png"
+                        });
+
+                        weatherforecastList.ItemsSource = forecasts;
+
+
                         try
-							{
+                        {
 								ImageBrush img1 = new ImageBrush();
 								ImageBrush img2 = new ImageBrush();
 								ImageBrush img3 = new ImageBrush();
@@ -187,8 +224,13 @@ namespace WetterApp
 
 
 		}
+        public class WeatherForecast
+        {
+            public string Temperature { get; set; }
+            public string IconPath { get; set; }
+        }
 
-	}
+    }
 
 	
 }
