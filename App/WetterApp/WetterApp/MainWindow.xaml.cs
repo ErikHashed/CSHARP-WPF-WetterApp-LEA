@@ -79,22 +79,33 @@ namespace WetterApp
                                 Content = name,
                                 HorizontalAlignment = HorizontalAlignment.Center,
                                 VerticalAlignment = VerticalAlignment.Top, // Oben ausrichten
-                                IsHitTestVisible = false,
-							};
+                                FontSize = 20,
+                                IsHitTestVisible = false
+                            };
 
                             Label temperature = new Label
                             {
-                                Content = $"{data.data[0].temp}",
-                                FontSize = 22,
-                                Width = 120,
-                                IsHitTestVisible = false,
-							};
+                                Content = $"{data.data[0].temp}°",
+                                FontSize = 24,
+                                Width = 70,
+                                Height = 222,
+                                IsHitTestVisible = false
+                            };
+
+                            Label description = new Label
+                            {
+                                Content = $"{data.data[0].weather.description}",
+                                Width = 100,
+                                Height = 172,
+                                IsHitTestVisible=false
+                            };
 
                             Grid grid = new Grid();
                             grid.Children.Add(newRectangle);
                             grid.Children.Add(nameLabel);
                             grid.Children.Add(weatherIcon);
                             grid.Children.Add(temperature);
+                            grid.Children.Add(description);
 
                             StackPanel stackPanel = new StackPanel
                             {
