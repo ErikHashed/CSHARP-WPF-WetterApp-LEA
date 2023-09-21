@@ -7,16 +7,23 @@
         mc:Ignorable="d"
         Title="daten" Height="450" Width="800">
     <Grid>
-        <Rectangle x:Name="weatherImage" Height="120" Margin="148,10,400,304"/>
-        <Rectangle x:Name="weatherIcon1" Margin="493,106,243,268" ></Rectangle>
-        <Rectangle x:Name="weatherIcon2" Margin="493,166,237,215" ></Rectangle>
-        <Rectangle x:Name="weatherIcon3" Margin="493,224,237,143" ></Rectangle>
-        <Rectangle x:Name="weatherIcon4" Margin="493,296,237,87" ></Rectangle>
-        <Rectangle x:Name="weatherIcon5" Margin="499,347,237,10" ></Rectangle>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF2EE1FF" Offset="0.582"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Rectangle x:Name="weatherImage" Height="120" Margin="10,0,538,314"/>
         <!--<TextBlock x:Name="txtErgebnis" HorizontalAlignment="Left" Margin="123,0,0,0" VerticalAlignment="Center" Height="192" Width="327"/>-->
-        <TextBlock x:Name="txtTemp" Margin="252,134,0,0" FontSize="24" HorizontalAlignment="Left" Width="252" VerticalAlignment="Top"/>
+        <TextBlock x:Name="txtTemp" Margin="10,120,0,0" FontSize="24" HorizontalAlignment="Left" Width="252" VerticalAlignment="Top"/>
         <TextBlock x:Name="txtMinMax" Margin="252,166,342,223" FontSize="16"></TextBlock>
-        <ListBox x:Name="weatherforecastList" d:ItemsSource="{d:SampleData ItemCount=5}" Margin="562,104,0,0" HorizontalAlignment="Left" Width="238" FontSize="20">
+        <ListBox x:Name="weatherforecastList" d:ItemsSource="{d:SampleData ItemCount=5}" BorderBrush="White" BorderThickness="1" Margin="274,112,0,3" HorizontalAlignment="Left" Width="336" FontSize="20">
+            <ListBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FF2EE1FF" Offset="0.612"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </ListBox.Background>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
@@ -26,6 +33,6 @@
                 </DataTemplate>
             </ListBox.ItemTemplate>
         </ListBox>
-        <Button Width="120" Height="120" Content="klick für unwetterbenachrichtigung" Click="unwetterClickTemp"></Button>
+        <Label Content="5-Tage-Vorhersage" HorizontalAlignment="Left" BorderBrush="Transparent" BorderThickness="0" Margin="274,87,0,0" VerticalAlignment="Top" Width="128" Height="25"/>
     </Grid>
 </Window>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,15 +20,20 @@ namespace WetterApp
     public partial class InputDialog : Window
     {
         public string UserInput { get; set; }
+        private string citiesFilePath = $"../../files/cities.txt";
+
 
         public InputDialog()
         {
+
             InitializeComponent();
         }
 
         private void okClick(object sender, RoutedEventArgs e)
         {
             UserInput = inputTextBox.Text;
+            File.AppendAllText(citiesFilePath, UserInput + "\n");
+
             this.Close();
         }
     }

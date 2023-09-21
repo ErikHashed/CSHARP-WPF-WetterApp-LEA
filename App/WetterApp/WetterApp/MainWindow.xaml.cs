@@ -17,7 +17,7 @@ using System.Threading;
 using System.Windows.Markup;
 using System.Device.Location;
 using Microsoft.Toolkit.Uwp.Notifications;
-
+using System.IO;
 
 namespace WetterApp
 {
@@ -28,11 +28,14 @@ namespace WetterApp
 
         public static string city = null;
 		private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
+        private string citiesFilePath = $"../../files/cities.txt";
+
 
 
         public MainWindow()
         {
             InitializeComponent();
+            LoadData();
         }
 
         public async void openAddWindow(object sender, RoutedEventArgs e)
@@ -90,15 +93,17 @@ namespace WetterApp
                             {
                                 Content = $"{data.data[0].temp}°",
                                 FontSize = 24,
-                                Width = 70,
-                                Height = 222,
+                                Width = 65,
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                Height = 232,
                                 IsHitTestVisible = false
                             };
 
                             Label description = new Label
                             {
                                 Content = $"{data.data[0].weather.description} {forecastData.data[0].min_temp}° / {forecastData.data[0].max_temp}°",
-                                //Width = 100,
+                                Width = 150,
+                                
                                 Height = 172,
                                 IsHitTestVisible=false
                             };
@@ -147,5 +152,100 @@ namespace WetterApp
 
 		}
 
-	}
+        async void LoadData()
+        {
+            string[] lines = File.ReadAllLines(citiesFilePath);
+
+
+            for (int i = 0; i < lines.Length; i++)
+            {
+
+                string url = $"https://api.weatherbit.io/v2.0/current?city={lines[i]}&key={apiKey}&lang=de";
+                string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={lines[i]}&key={apiKey}";
+
+                try
+                {
+                    using (HttpClient client = new HttpClient())
+                    {
+                        HttpResponseMessage response = await client.GetAsync(url);
+                        HttpResponseMessage forecastResponse = await client.GetAsync(forecastUrl);
+
+                        if (response.IsSuccessStatusCode)
+                        {
+                            string json = await response.Content.ReadAsStringAsync();
+                            string forecastJson = await forecastResponse.Content.ReadAsStringAsync();
+                            dynamic data = JObject.Parse(json);
+                            dynamic forecastData = JObject.Parse(forecastJson);
+
+                            Rectangle newRectangle = new Rectangle
+                            {
+                                Width = 200,
+                                Height = 280,
+                                Fill = Brushes.LightBlue,
+                                HorizontalAlignment = HorizontalAlignment.Right,
+                                Name = lines[i],
+                            };
+
+                            Image weatherIcon = new Image
+                            {
+                                Source = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png")),
+                                Width = 120,
+                                Height = 120,
+                            };
+
+                            Label nameLabel = new Label
+                            {
+                                Content = lines[i],
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Top, // Oben ausrichten
+                                FontSize = 20,
+                                IsHitTestVisible = false
+                            };
+
+                            Label temperature = new Label
+                            {
+                                Content = $"{data.data[0].temp}°",
+                                FontSize = 24,
+                                Width = 70,
+                                Height = 222,
+                                IsHitTestVisible = false
+                            };
+
+                            Label description = new Label
+                            {
+                                Content = $"{data.data[0].weather.description} {forecastData.data[0].min_temp}° / {forecastData.data[0].max_temp}°",
+                                //Width = 100,
+                                Height = 172,
+                                IsHitTestVisible = false
+                            };
+
+                            Grid grid = new Grid();
+                            grid.Children.Add(newRectangle);
+                            grid.Children.Add(nameLabel);
+                            grid.Children.Add(weatherIcon);
+                            grid.Children.Add(temperature);
+                            grid.Children.Add(description);
+
+                            StackPanel stackPanel = new StackPanel
+                            {
+                                Orientation = Orientation.Vertical
+                            };
+
+                            stackPanel.Children.Add(grid);
+
+                            // Add the stackPanel to your UI container once
+                            rectangleList.Items.Add(stackPanel);
+
+                            // Attach the event handler to the newRectangle
+                            newRectangle.MouseDown += Rectangle_Click;
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+            }
+        }
+    }
 }

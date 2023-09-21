@@ -108,35 +108,53 @@ namespace WetterApp
 
 						forecasts.Add(new WeatherForecast
 						{
-							Temperature = $"{data.data[0].min_temp} / {data.data[0].max_temp}",
+							Temperature = $"{data.data[0].datetime}   {data.data[0].min_temp} / {data.data[0].max_temp}",
 							IconPath = $"pack://application:,,,/images/{data.data[0].weather.icon}.png"
 						});
 
 						forecasts.Add(new WeatherForecast
 						{
-							Temperature = $"{data.data[1].min_temp} / {data.data[1].max_temp}",
+							Temperature = $"{data.data[1].datetime}   {data.data[1].min_temp} / {data.data[1].max_temp}",
 							IconPath = $"pack://application:,,,/images/{data.data[1].weather.icon}.png"
 						});
 
 						forecasts.Add(new WeatherForecast
 						{
-							Temperature = $"{data.data[2].min_temp} / {data.data[2].max_temp}",
+							Temperature = $"{data.data[2].datetime}   {data.data[2].min_temp} / {data.data[2].max_temp}",
 							IconPath = $"pack://application:,,,/images/{data.data[2].weather.icon}.png"
 						});
 
 						forecasts.Add(new WeatherForecast
 						{
-							Temperature = $"{data.data[3].min_temp} / {data.data[3].max_temp}",
+							Temperature = $"{data.data[3].datetime}   {data.data[3].min_temp} / {data.data[3].max_temp}",
 							IconPath = $"pack://application:,,,/images/{data.data[3].weather.icon}.png"
 						});
 
 						forecasts.Add(new WeatherForecast
 						{
-							Temperature = $"{data.data[4].min_temp} / {data.data[4].max_temp}",
+							Temperature = $"{data.data[4].datetime}   {data.data[4].min_temp} / {data.data[4].max_temp}",
 							IconPath = $"pack://application:,,,/images/{data.data[4].weather.icon}.png"
 						});
 
-						weatherforecastList.ItemsSource = forecasts;
+                        forecasts.Add(new WeatherForecast
+                        {
+                            Temperature = $"{data.data[5].datetime}   {data.data[5].min_temp} / {data.data[5].max_temp}",
+                            IconPath = $"pack://application:,,,/images/{data.data[5].weather.icon}.png"
+                        });
+
+                        forecasts.Add(new WeatherForecast
+                        {
+                            Temperature = $"{data.data[6].datetime}   {data.data[6].min_temp} / {data.data[6].max_temp}",
+                            IconPath = $"pack://application:,,,/images/{data.data[6].weather.icon}.png"
+                        });
+
+                        forecasts.Add(new WeatherForecast
+                        {
+                            Temperature = $"{data.data[7].datetime}   {data.data[7].min_temp} / {data.data[7].max_temp}",
+                            IconPath = $"pack://application:,,,/images/{data.data[7].weather.icon}.png"
+                        });
+
+                        weatherforecastList.ItemsSource = forecasts;
 
 						try
                         {
@@ -151,11 +169,7 @@ namespace WetterApp
 								img3.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[2].weather.icon}.png"));
 								img4.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[3].weather.icon}.png"));
 								img5.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[4].weather.icon}.png"));
-								weatherIcon1.Fill = img1;
-								weatherIcon2.Fill = img2;
-								weatherIcon3.Fill = img3;
-								weatherIcon4.Fill = img4;
-								weatherIcon5.Fill = img5;
+
 						}
 						catch (Exception ex)
 						{
