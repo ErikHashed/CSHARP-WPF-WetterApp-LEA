@@ -20,5 +20,7 @@
                 </ListBox.ItemsPanel>
             </ListBox>
         </StackPanel>
+        <Button x:Name="settingsButton" Content="Settings" Margin="623,327,77,53" Click="settingsButton_Click"/>
+
     </Grid>
 </Window>

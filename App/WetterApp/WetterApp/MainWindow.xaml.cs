@@ -35,6 +35,7 @@ namespace WetterApp
         public MainWindow()
         {
             InitializeComponent();
+            
             LoadData();
         }
 
@@ -44,8 +45,8 @@ namespace WetterApp
             inputDialog.ShowDialog();
 
             name = inputDialog.UserInput;
-            string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang=de";
-            string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={name}&key={apiKey}";
+            string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang={Properties.Settings.Default.language}";
+            string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={name}&key={apiKey}&lang={Properties.Settings.Default.language}";
 
 			try
             {
@@ -160,8 +161,8 @@ namespace WetterApp
             for (int i = 0; i < lines.Length; i++)
             {
 
-                string url = $"https://api.weatherbit.io/v2.0/current?city={lines[i]}&key={apiKey}&lang=de";
-                string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={lines[i]}&key={apiKey}";
+                string url = $"https://api.weatherbit.io/v2.0/current?city={lines[i]}&key={apiKey}&lang={Properties.Settings.Default.language}";
+                string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={lines[i]}&key={apiKey}&lang={Properties.Settings.Default.language}";
 
                 try
                 {
@@ -247,5 +248,11 @@ namespace WetterApp
                 }
             }
         }
-    }
+
+		private void settingsButton_Click(object sender, RoutedEventArgs e)
+		{
+            Settings settingsWindow = new Settings();
+            settingsWindow.ShowDialog();
+		}
+	}
 }

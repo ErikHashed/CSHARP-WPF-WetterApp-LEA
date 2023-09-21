@@ -18,6 +18,7 @@ using Microsoft.Toolkit.Uwp.Notifications;
 
 namespace WetterApp
 {
+
 	public class WeatherForecast
 	{
 		public string Temperature { get; set; }
@@ -26,6 +27,9 @@ namespace WetterApp
 
 	public partial class data : Window
 	{
+		public string ApiLanguage { get; set; }
+
+
 		public data(string city)
 		{
 			InitializeComponent();
@@ -39,8 +43,8 @@ namespace WetterApp
 		private async void GetInformation(string city)
 		{
 
-			string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang=de";
-			string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={city}&key={apiKey}";
+			string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang={Settings.ApiLanguage}";
+			string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={city}&key={apiKey}&lang={Settings.ApiLanguage}";
 
             try
 			{
@@ -61,7 +65,7 @@ namespace WetterApp
 						string longschlong = data.data[0].lon; //insider Variable
 						double windgeschwindigkeit = data.data[0].wind_spd;
 						string icon = data.data[0].weather.icon;
-
+						nameLabel.Content = city;
 						
 						ImageBrush imgBrush = new ImageBrush();
 

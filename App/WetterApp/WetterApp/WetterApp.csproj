@@ -62,6 +62,9 @@
     <Compile Include="data.xaml.cs">
       <DependentUpon>data.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UnwetterWarnung.cs" />
     <Compile Include="InputDialog.xaml.cs">
       <DependentUpon>InputDialog.xaml</DependentUpon>
@@ -83,6 +86,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="InputDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Settings.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,9 +119,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Screenshot %281%29.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\a01d.png" />

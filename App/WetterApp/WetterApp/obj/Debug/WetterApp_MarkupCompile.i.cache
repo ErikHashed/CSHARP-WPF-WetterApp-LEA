@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\
 WetterApp
 none
 false
 DEBUG;TRACE
-\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\App.xaml
-3-1421412987
+C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\App.xaml
+4-1370150688
 
-9-2145911603
+10-1887802306
 2192131431138
-data.xaml;MainWindow.xaml;InputDialog.xaml;
+data.xaml;MainWindow.xaml;InputDialog.xaml;Settings.xaml;
 
-True
+False
 
