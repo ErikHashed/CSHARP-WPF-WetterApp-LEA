@@ -22,8 +22,13 @@ namespace WetterApp
 {
     public partial class MainWindow : Window
     {
-        private string selectedCity = null;
+        private static string selectedCity = null;
         public string name = null;
+
+        public static string city = null;
+		private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
+		//private string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang=de";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -37,82 +42,104 @@ namespace WetterApp
             window.Show();
         }
 
-        public void openAddWindow(object sender, RoutedEventArgs e)
+        public async void openAddWindow(object sender, RoutedEventArgs e)
         {
             InputDialog inputDialog = new InputDialog();
             inputDialog.ShowDialog();
 
+
             name = inputDialog.UserInput;
-
-            if (!string.IsNullOrEmpty(name))
+            city = name;
+            try
             {
-                Rectangle newRectangle = new Rectangle
+                using (HttpClient client = new HttpClient())
                 {
-                    Width = 200,
-                    Height = 280,
-                    Fill = Brushes.LightBlue,
-                    HorizontalAlignment = HorizontalAlignment.Right,
-                    Name = name,
-                    
-                };
-
-                Label nameLabel = new Label
-                {
-                    Content = name,
-                    HorizontalAlignment = HorizontalAlignment.Center,
-                    VerticalAlignment = VerticalAlignment.Top // Oben ausrichten
-                };
-
-                Grid grid = new Grid();
-                grid.Children.Add(newRectangle);
-                grid.Children.Add(nameLabel);
-
-                StackPanel stackPanel = new StackPanel
-                {
-                    Orientation = Orientation.Vertical
-                };
-
-                stackPanel.Children.Add(grid);
-
-                rectangleList.Items.Add(stackPanel);
+                    HttpResponseMessage response = await client.GetAsync($"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang=de");
 
 
+                    if (response.IsSuccessStatusCode)
+                    {
+                        if (!string.IsNullOrEmpty(name))
+                        {
+                            Rectangle newRectangle = new Rectangle
+                            {
+                                Width = 200,
+                                Height = 280,
+                                Fill = Brushes.LightBlue,
+                                HorizontalAlignment = HorizontalAlignment.Right,
+                                Name = name,
+                            };
 
-                // Fügen Sie das Click-Ereignis zum Rechteck hinzu
-                try
-                {
 
-                    newRectangle.MouseDown += Rectangle_Click;
+                            string json = await response.Content.ReadAsStringAsync();
+                            dynamic data = JObject.Parse(json);
 
-                    rectangleList.Items.Add(stackPanel);
+                            Image weatherIcon = new Image
+                            {
+                                Source = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png")),
+                                Width = 120,
+                                Height = 120,
+                            };
+
+                            Label nameLabel = new Label
+                            {
+                                Content = name,
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                VerticalAlignment = VerticalAlignment.Top // Oben ausrichten
+                            };
+
+                            Label temperature = new Label
+                            {
+                                Content = $"{data.data[0].temp}",
+                                FontSize = 22,
+                            };
+
+                            Grid grid = new Grid();
+                            grid.Children.Add(newRectangle);
+                            grid.Children.Add(nameLabel);
+                            grid.Children.Add(weatherIcon);
+                            grid.Children.Add(temperature);
+
+                            StackPanel stackPanel = new StackPanel
+                            {
+                                Orientation = Orientation.Vertical
+                            };
+
+                            stackPanel.Children.Add(grid);
+
+                            rectangleList.Items.Add(stackPanel);
+
+                            // Fügen Sie das Click-Ereignis zum Rechteck hinzu
+
+                            newRectangle.MouseDown += Rectangle_Click;
+                            rectangleList.Items.Add(stackPanel);
+
+                        }
+                    }
 
                 }
-                catch (Exception ex)
-                { 
-                    
-                }
-               
 
             }
-
-            
-
-        }
-        void Rectangle_Click(object sender, RoutedEventArgs e)
-        {
-            Rectangle clickedRectangle = (Rectangle)sender;
-            //Label nameLabel = ((Grid)clickedRectangle.Parent).Children[1] as Label;
-            
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+		}
 
 
+		void Rectangle_Click(object sender, RoutedEventArgs e)
+		{
+			Rectangle clickedRectangle = (Rectangle)sender;
+			//Label nameLabel = ((Grid)clickedRectangle.Parent).Children[1] as Label;
 
-            data window = new data(clickedRectangle.Name);
-            window.Show();
+			data window = new data(clickedRectangle.Name);
+			window.Show();
 
+		}
 
-            
-        }
+	}
+        
 
     }
-}
+
 
