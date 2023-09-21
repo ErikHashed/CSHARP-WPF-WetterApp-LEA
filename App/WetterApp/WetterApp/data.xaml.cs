@@ -104,6 +104,8 @@ namespace WetterApp
 						string json = await responseForecast.Content.ReadAsStringAsync();
 						dynamic data = JObject.Parse(json);
 
+						
+
 						List<WeatherForecast> forecasts = new List<WeatherForecast>();
 
 						forecasts.Add(new WeatherForecast
