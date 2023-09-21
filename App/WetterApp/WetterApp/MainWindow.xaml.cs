@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using System.Threading;
 using System.Windows.Markup;
 using System.Device.Location;
+using Microsoft.Toolkit.Uwp.Notifications;
 
 
 namespace WetterApp
@@ -23,23 +24,15 @@ namespace WetterApp
     public partial class MainWindow : Window
     {
         private static string selectedCity = null;
-        public string name = null;
+        public static string name = null;
 
         public static string city = null;
 		private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
-		//private string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang=de";
+        private string apiUrl;
 
         public MainWindow()
         {
             InitializeComponent();
-        }
-
-        private void temporärSearch(object sender, RoutedEventArgs e)
-        {
-            Button button = (Button)sender;
-            selectedCity = button.Tag.ToString();
-            data window = new data(selectedCity);
-            window.Show();
         }
 
         public async void openAddWindow(object sender, RoutedEventArgs e)
@@ -47,14 +40,14 @@ namespace WetterApp
             InputDialog inputDialog = new InputDialog();
             inputDialog.ShowDialog();
 
-
             name = inputDialog.UserInput;
-            city = name;
-            try
+            apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang=de";
+
+			try
             {
                 using (HttpClient client = new HttpClient())
                 {
-                    HttpResponseMessage response = await client.GetAsync($"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang=de");
+                    HttpResponseMessage response = await client.GetAsync(apiUrl);
 
 
                     if (response.IsSuccessStatusCode)
@@ -85,14 +78,17 @@ namespace WetterApp
                             {
                                 Content = name,
                                 HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Top // Oben ausrichten
-                            };
+                                VerticalAlignment = VerticalAlignment.Top, // Oben ausrichten
+                                IsHitTestVisible = false,
+							};
 
                             Label temperature = new Label
                             {
                                 Content = $"{data.data[0].temp}",
                                 FontSize = 22,
-                            };
+                                Width = 120,
+                                IsHitTestVisible = false,
+							};
 
                             Grid grid = new Grid();
                             grid.Children.Add(newRectangle);
@@ -138,8 +134,4 @@ namespace WetterApp
 		}
 
 	}
-        
-
-    }
-
-
+}

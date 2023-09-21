@@ -13,18 +13,22 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Toolkit.Uwp.Notifications;
+
 
 namespace WetterApp
 {
-	/// <summary>
-	/// Interaction logic for data.xaml
-	/// </summary>
+	public class WeatherForecast
+	{
+		public string Temperature { get; set; }
+		public string IconPath { get; set; }
+	}
+
 	public partial class data : Window
 	{
 		public data(string city)
 		{
 			InitializeComponent();
-
 
 			GetInformation(city);
 		}
@@ -38,16 +42,11 @@ namespace WetterApp
 			string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang=de";
 			string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={city}&key={apiKey}";
 
-
-
-           
-
             try
 			{
 				using (HttpClient client = new HttpClient())
 				{
 					HttpResponseMessage response = await client.GetAsync(apiUrl);
-
 
 					if (response.IsSuccessStatusCode)
 					{
@@ -64,10 +63,10 @@ namespace WetterApp
 						string icon = data.data[0].weather.icon;
 
 						
-							ImageBrush sexxen = new ImageBrush();
+						ImageBrush imgBrush = new ImageBrush();
 
-							sexxen.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{icon}.png"));
-							weatherImage.Fill = sexxen;
+						imgBrush.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{icon}.png"));
+						weatherImage.Fill = imgBrush;
 
 
 
@@ -97,58 +96,49 @@ namespace WetterApp
 
 				}
 				
-
-
-
-					using (HttpClient client = new HttpClient())
+				using (HttpClient client = new HttpClient())
+				{
+					HttpResponseMessage responseForecast = await client.GetAsync(forecastUrl);
+					if (responseForecast.IsSuccessStatusCode)
 					{
-						HttpResponseMessage responseForecast = await client.GetAsync(forecastUrl);
-						if (responseForecast.IsSuccessStatusCode)
+						string json = await responseForecast.Content.ReadAsStringAsync();
+						dynamic data = JObject.Parse(json);
+
+						List<WeatherForecast> forecasts = new List<WeatherForecast>();
+
+						forecasts.Add(new WeatherForecast
 						{
+							Temperature = $"{data.data[0].min_temp} / {data.data[0].max_temp}",
+							IconPath = $"pack://application:,,,/images/{data.data[0].weather.icon}.png"
+						});
 
-							string json = await responseForecast.Content.ReadAsStringAsync();
-							dynamic data = JObject.Parse(json);
+						forecasts.Add(new WeatherForecast
+						{
+							Temperature = $"{data.data[1].min_temp} / {data.data[1].max_temp}",
+							IconPath = $"pack://application:,,,/images/{data.data[1].weather.icon}.png"
+						});
 
-                    
+						forecasts.Add(new WeatherForecast
+						{
+							Temperature = $"{data.data[2].min_temp} / {data.data[2].max_temp}",
+							IconPath = $"pack://application:,,,/images/{data.data[2].weather.icon}.png"
+						});
 
+						forecasts.Add(new WeatherForecast
+						{
+							Temperature = $"{data.data[3].min_temp} / {data.data[3].max_temp}",
+							IconPath = $"pack://application:,,,/images/{data.data[3].weather.icon}.png"
+						});
 
-                        List<WeatherForecast> forecasts = new List<WeatherForecast>();
+						forecasts.Add(new WeatherForecast
+						{
+							Temperature = $"{data.data[4].min_temp} / {data.data[4].max_temp}",
+							IconPath = $"pack://application:,,,/images/{data.data[4].weather.icon}.png"
+						});
 
+						weatherforecastList.ItemsSource = forecasts;
 
-                        forecasts.Add(new WeatherForecast
-                        {
-                            Temperature = $"{data.data[0].min_temp} / {data.data[0].max_temp}",
-                            IconPath = $"pack://application:,,,/images/{data.data[0].weather.icon}.png"
-                        });
-
-                        forecasts.Add(new WeatherForecast
-                        {
-                            Temperature = $"{data.data[1].min_temp} / {data.data[1].max_temp}",
-                            IconPath = $"pack://application:,,,/images/{data.data[1].weather.icon}.png"
-                        });
-
-                        forecasts.Add(new WeatherForecast
-                        {
-                            Temperature = $"{data.data[2].min_temp} / {data.data[2].max_temp}",
-                            IconPath = $"pack://application:,,,/images/{data.data[2].weather.icon}.png"
-                        });
-
-                        forecasts.Add(new WeatherForecast
-                        {
-                            Temperature = $"{data.data[3].min_temp} / {data.data[3].max_temp}",
-                            IconPath = $"pack://application:,,,/images/{data.data[3].weather.icon}.png"
-                        });
-
-                        forecasts.Add(new WeatherForecast
-                        {
-                            Temperature = $"{data.data[4].min_temp} / {data.data[4].max_temp}",
-                            IconPath = $"pack://application:,,,/images/{data.data[4].weather.icon}.png"
-                        });
-
-                        weatherforecastList.ItemsSource = forecasts;
-
-
-                        try
+						try
                         {
 								ImageBrush img1 = new ImageBrush();
 								ImageBrush img2 = new ImageBrush();
@@ -166,18 +156,13 @@ namespace WetterApp
 								weatherIcon3.Fill = img3;
 								weatherIcon4.Fill = img4;
 								weatherIcon5.Fill = img5;
-							}
-							catch (Exception ex)
-							{
-								MessageBox.Show(ex.Message);
-							}
-
-
-							//txtMinMax.Text = maxTemp + "°/" + minTemp+ "°";
+						}
+						catch (Exception ex)
+						{
+							MessageBox.Show(ex.Message);
 						}
 					}
-				
-               
+				}               
             }
 			catch (Exception ex)
 			{
@@ -185,9 +170,8 @@ namespace WetterApp
 			}
 		}
 
-		private async Task Unwetter(string city)
+		private async Task servereWeatherWarning(string city)
 		{
-
 			string url = $"https://api.weatherbit.io/v2.0/alerts?city={city}&key={apiKey}";
 
 			try
@@ -209,8 +193,6 @@ namespace WetterApp
 							MessageBox.Show("Wir haben DAAAATEEEEEN");
 						}
 
-
-
 						//string unweatherName = data.data[0].title;
 						//unweatherTextBox.Text = unweatherName;
 					}
@@ -224,13 +206,18 @@ namespace WetterApp
 
 
 		}
-        public class WeatherForecast
-        {
-            public string Temperature { get; set; }
-            public string IconPath { get; set; }
-        }
 
-    }
+		private void unwetterClickTemp(object sender, RoutedEventArgs e)
+		{
+			//new ToastContentBuilder()
+			//.AddArgument("action", "viewConversation")
+			//.AddArgument("conversationId", 9813)
+			//.AddHeader("1","UNWETTER!", "awiodzuawzgdzg")
+			//.AddText("Ich hab nen Steifen")
+			//.AddText("Ich bin gail!")
+			//.Show();
+		}
+	}
 
 	
 }

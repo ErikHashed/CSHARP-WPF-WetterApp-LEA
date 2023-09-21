@@ -24,10 +24,8 @@
                         <Image Source="{Binding IconPath}"  Width="60" Height="60" Margin="10 0 0 0"/>
                     </StackPanel>
                 </DataTemplate>
-
             </ListBox.ItemTemplate>
-
-
         </ListBox>
+        <Button Width="120" Height="120" Content="klick für unwetterbenachrichtigung" Click="unwetterClickTemp"></Button>
     </Grid>
 </Window>

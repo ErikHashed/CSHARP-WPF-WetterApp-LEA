@@ -11,12 +11,11 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.Toolkit.Uwp.Notifications;
+
 
 namespace WetterApp
 {
-    /// <summary>
-    /// Interaktionslogik für Window1.xaml
-    /// </summary>
     public partial class InputDialog : Window
     {
         public string UserInput { get; set; }
@@ -31,7 +30,5 @@ namespace WetterApp
             UserInput = inputTextBox.Text;
             this.Close();
         }
-
-        
     }
 }

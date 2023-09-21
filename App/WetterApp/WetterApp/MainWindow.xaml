@@ -8,7 +8,7 @@
     <Grid>
         <!--<Image x:Name="Bild" Margin="93,232,350,39" Source="/Screenshot (1).png" />-->
         <Label x:Name="location" HorizontalAlignment="Center" Height="100" Margin="10,10,10,10" VerticalAlignment="Top" Width="160"/>
-        <Button Content="Suchen" HorizontalAlignment="Center" Margin="0,312,0,0" VerticalAlignment="Top" Click="temporärSearch" Tag="selectedCity" RenderTransformOrigin="9.185,-1.743" Height="30"/>
+        <Button Content="Suchen" HorizontalAlignment="Center" Margin="0,312,0,0" VerticalAlignment="Top" Tag="selectedCity" RenderTransformOrigin="9.185,-1.743" Height="30"/>
         <Button Content="Hinzufügen" HorizontalAlignment="Left" Margin="51,312,0,0" VerticalAlignment="Top" Click="openAddWindow" Height="30"/>
         <StackPanel>
             <ListBox x:Name="rectangleList" Height="299" Width="788">
