@@ -28,7 +28,7 @@ namespace WetterApp
 
         public static string city = null;
 		private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
-        private string apiUrl;
+
 
         public MainWindow()
         {
@@ -41,7 +41,8 @@ namespace WetterApp
             inputDialog.ShowDialog();
 
             name = inputDialog.UserInput;
-            apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang=de";
+            string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang=de";
+            string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={name}&key={apiKey}";
 
 			try
             {
@@ -49,12 +50,18 @@ namespace WetterApp
                 {
                     HttpResponseMessage response = await client.GetAsync(apiUrl);
 
+                    HttpResponseMessage responseForecast = await client.GetAsync(forecastUrl);
 
                     if (response.IsSuccessStatusCode)
                     {
                         if (!string.IsNullOrEmpty(name))
                         {
-                            Rectangle newRectangle = new Rectangle
+							string json = await response.Content.ReadAsStringAsync();
+                            string forecastJson = await responseForecast.Content.ReadAsStringAsync();
+							dynamic data = JObject.Parse(json);
+                            dynamic forecastData = JObject.Parse(forecastJson);
+
+							Rectangle newRectangle = new Rectangle
                             {
                                 Width = 200,
                                 Height = 280,
@@ -62,10 +69,6 @@ namespace WetterApp
                                 HorizontalAlignment = HorizontalAlignment.Right,
                                 Name = name,
                             };
-
-
-                            string json = await response.Content.ReadAsStringAsync();
-                            dynamic data = JObject.Parse(json);
 
                             Image weatherIcon = new Image
                             {
@@ -94,8 +97,8 @@ namespace WetterApp
 
                             Label description = new Label
                             {
-                                Content = $"{data.data[0].weather.description}",
-                                Width = 100,
+                                Content = $"{data.data[0].weather.description} {forecastData.data[0].min_temp}° / {forecastData.data[0].max_temp}°",
+                                //Width = 100,
                                 Height = 172,
                                 IsHitTestVisible=false
                             };
