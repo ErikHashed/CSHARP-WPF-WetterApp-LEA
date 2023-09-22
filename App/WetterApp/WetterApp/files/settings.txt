@@ -1,0 +1,3 @@
+lang=de
+units=units=I
+windspeed=True

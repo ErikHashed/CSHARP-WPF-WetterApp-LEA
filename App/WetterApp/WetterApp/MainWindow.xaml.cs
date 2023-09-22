@@ -105,8 +105,8 @@ namespace WetterApp
             inputDialog.ShowDialog();
 
             name = inputDialog.UserInput;
-            string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang={Properties.Settings.Default.language}";
-            string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={name}&key={apiKey}&lang={Properties.Settings.Default.language}";
+            string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang=de";
+            string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={name}&key={apiKey}&lang=de";
 
 			try
             {
@@ -215,14 +215,40 @@ namespace WetterApp
 
         async void LoadData()
         {
-            string[] lines = File.ReadAllLines(citiesFilePath);
+			try
+			{
+                if (File.Exists(Settings.SettingsFilePath))
+                {
+                    string[] settingsLines = File.ReadAllLines(Settings.SettingsFilePath);
+
+                    // Parse the lines and populate the AppSettings object
+
+                    Settings.ApiLanguage = settingsLines[0];
+                    Settings.MeasureUnit = settingsLines[1];
+                    string[] parts = settingsLines[2].Split('=');
+                    if(parts.Length == 2)
+                    {
+                        Settings.Windspeed = bool.Parse(parts[1]);
+                    }
+				}
+				else
+				{
+					MessageBox.Show("Settingsdatei nicht gefunden!");
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error loading settings: {ex.Message}");
+			}
+
+			string[] lines = File.ReadAllLines(citiesFilePath);
 
 
             for (int i = 0; i < lines.Length; i++)
             {
 
-                string url = $"https://api.weatherbit.io/v2.0/current?city={lines[i]}&key={apiKey}&lang={Properties.Settings.Default.language}";
-                string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={lines[i]}&key={apiKey}&lang={Properties.Settings.Default.language}";
+                string url = $"https://api.weatherbit.io/v2.0/current?city={lines[i]}&key={apiKey}&{Settings.ApiLanguage}&{Settings.MeasureUnit}";
+                string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={lines[i]}&key={apiKey}&{Settings.ApiLanguage}&{Settings.MeasureUnit}";
 
                 try
                 {
@@ -307,7 +333,11 @@ namespace WetterApp
                     MessageBox.Show(ex.Message);
                 }
             }
-        }
+
+
+			
+
+		}
 
 		private void settingsButton_Click(object sender, RoutedEventArgs e)
 		{

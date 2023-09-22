@@ -52,8 +52,8 @@ namespace WetterApp
 		private async void GetInformation(string city)
 		{
 
-			string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang={Settings.ApiLanguage}";
-			string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={city}&key={apiKey}&lang={Settings.ApiLanguage}";
+			string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang={Settings.ApiLanguage}&{Settings.MeasureUnit}";
+			string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={city}&key={apiKey}&lang={Settings.ApiLanguage}&{Settings.MeasureUnit}";
 
             try
 			{
@@ -72,7 +72,6 @@ namespace WetterApp
 						string uhrzeit = data.data[0].ob_time;
 						string latte = data.data[0].lat;       //insider Variable
 						string longschlong = data.data[0].lon; //insider Variable
-						double windgeschwindigkeit = data.data[0].wind_spd;
 						string icon = data.data[0].weather.icon;
 						nameLabel.Content = city;
 						
@@ -98,10 +97,13 @@ namespace WetterApp
 
 
                         txtTemp.Text = temperatur + "°C";
-
-                        //txtErgebnis.Text = $"Stadt: {city} \nBeschreibung: {beschreibung}\nTemperatur: {temperatur}°C \nWettername: {wettername} " +
-                        //$"\nUhrzeit: {uhrzeit} Längengrad: {longschlong} Breitengrad: {latte} \n Windgeschwindigkeit: {windgeschwindigkeit} \n";
-                    }
+						if(Settings.Windspeed == true) 
+						{
+							double windgeschwindigkeit = data.data[0].wind_spd;
+							txtErgebnis.Text = $"Windspeed = {windgeschwindigkeit}\n";
+						}
+						
+					}
 					else
 					{
 						//txtErgebnis.Text = "Fehler beim Abrufen der Stadt.";

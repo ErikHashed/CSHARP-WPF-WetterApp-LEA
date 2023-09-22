@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:WetterApp"
         mc:Ignorable="d"
         Title="daten" Height="678" Width="393" Topmost="True" ResizeMode="NoResize" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
-    
+
     <Grid>
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -15,7 +15,7 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Rectangle x:Name="weatherImage" Margin="108,68,137,474" Height="120"/>
-        <!--<TextBlock x:Name="txtErgebnis" HorizontalAlignment="Left" Margin="123,0,0,0" VerticalAlignment="Center" Height="192" Width="327"/>-->
+        <TextBlock x:Name="txtErgebnis" HorizontalAlignment="Left" Margin="196,10,0,0" VerticalAlignment="Top" Height="76" Width="194"/>
         <TextBlock x:Name="txtTemp" Margin="196,145,0,0" FontSize="26" HorizontalAlignment="Left" Width="256" VerticalAlignment="Top" FontWeight="Bold"/>
         <TextBlock x:Name="txtMinMax" Margin="38,173,556,216" FontSize="16"></TextBlock>
         <ListBox x:Name="weatherforecastList" d:ItemsSource="{d:SampleData ItemCount=5}" BorderBrush="White" BorderThickness="1" Margin="0,218,0,0" HorizontalAlignment="Center" Width="336" FontSize="20">
