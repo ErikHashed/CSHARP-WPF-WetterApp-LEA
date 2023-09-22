@@ -5,15 +5,32 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WetterApp"
         mc:Ignorable="d"
-        Title="Settings" Height="450" Width="800">
+        Background="Transparent"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Title="Settings" Height="323" Width="455" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
     <Grid>
-        <ComboBox x:Name="languageListComboBox" HorizontalAlignment="Left" Margin="41,83,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="languageList_SelectionChanged">
+        <Border Background="Black" CornerRadius="20">
+        <ComboBox x:Name="languageListComboBox" HorizontalAlignment="Left" Margin="291,27,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="languageList_SelectionChanged">
             <ComboBoxItem Content="Deutsch" Tag="de"/>
             <ComboBoxItem Content="Englisch" Tag="en"/>
             <ComboBoxItem Content="mehr hier adden" Tag="sprache abkürzung hier"/>
 
 
         </ComboBox>
+        
+        
+        
 
+        </Border>
+        <Button Name="BackButton" Content="&#8617;" FontSize="16" Click="BackButton_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="25,23,374,264" FontFamily="Segoe UI Symbol" RenderTransformOrigin="0.521,-0.705">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="20" Background="{TemplateBinding Background}" Padding="5">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>

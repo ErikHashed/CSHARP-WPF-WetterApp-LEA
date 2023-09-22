@@ -18,6 +18,9 @@ using System.Windows.Markup;
 using System.Device.Location;
 using Microsoft.Toolkit.Uwp.Notifications;
 using System.IO;
+using System.Windows.Input;
+using System.Windows.Interop;
+using System.Runtime.InteropServices;
 
 namespace WetterApp
 {
@@ -31,15 +34,72 @@ namespace WetterApp
         private string citiesFilePath = $"../../files/cities.txt";
 
 
+        private const int HOTKEY_ID = 9000;
+        private const uint MOD_CONTROL = 0x0002; // Control-Taste
+
 
         public MainWindow()
         {
             InitializeComponent();
             
             LoadData();
+
+            Loaded += (s, e) =>
+            {
+                IntPtr handle = new WindowInteropHelper(this).Handle;
+                RegisterHotKey(handle, HOTKEY_ID, MOD_CONTROL, (uint)KeyInterop.VirtualKeyFromKey(Key.W));
+            };
+
+            Unloaded += (s, e) =>
+            {
+                IntPtr handle = new WindowInteropHelper(this).Handle;
+                UnregisterHotKey(handle, HOTKEY_ID);
+            };
         }
 
-        public async void openAddWindow(object sender, RoutedEventArgs e)
+
+        private void HotKeyPressed()
+        {
+            Settings newWindow = new Settings();
+            newWindow.Show();
+            
+
+        }
+
+        // Überschreiben von WndProc, um Nachrichten abzufangen
+        protected override void OnSourceInitialized(EventArgs e)
+        {
+            base.OnSourceInitialized(e);
+            IntPtr handle = new WindowInteropHelper(this).Handle;
+            HwndSource source = HwndSource.FromHwnd(handle);
+            source.AddHook(HwndHook);
+        }
+
+        private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            const int WM_HOTKEY = 0x0312;
+            switch (msg)
+            {
+                case WM_HOTKEY:
+                    int id = wParam.ToInt32();
+                    if (id == HOTKEY_ID)
+                    {
+                        HotKeyPressed();
+                    }
+                    handled = true;
+                    break;
+            }
+            return IntPtr.Zero;
+        }
+
+        [DllImport("user32.dll")]
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+
+        [DllImport("user32.dll")]
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+    
+
+    public async void openAddWindow(object sender, RoutedEventArgs e)
         {
             InputDialog inputDialog = new InputDialog();
             inputDialog.ShowDialog();
@@ -252,7 +312,7 @@ namespace WetterApp
 		private void settingsButton_Click(object sender, RoutedEventArgs e)
 		{
             Settings settingsWindow = new Settings();
-            settingsWindow.ShowDialog();
+            settingsWindow.Show();
 		}
 	}
 }

@@ -35,5 +35,10 @@ namespace WetterApp
 				Properties.Settings.Default.Save();
 			}
 		}
+
+		private void BackButton_Click(object sender, RoutedEventArgs e)
+		{
+			Close();
+		}
 	}
 }

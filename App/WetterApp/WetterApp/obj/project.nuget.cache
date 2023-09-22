@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "21kCm8VAPdO2adfhIBVcsRJ/aijKtW943mh509uAf0a03BNajsW4+81mI72Bt2ChrQie7H82JdnQ9if+8Su0bg==",
+  "dgSpecHash": "MDnHk1hi7Dxfjnaob8SPP+ZDhaeDh+QP3z5QqxMvXVg0PQt3HaQr/yny/0ZVEJUGmGax5VinxwCRTvcDnAGaPA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bib\\Documents\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\WetterApp.csproj",
+  "projectFilePath": "\\\\00E04C68006F\\Users\\bib\\OneDrive - bib & FHDW\\Dokumente\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\WetterApp.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bib\\.nuget\\packages\\microsoft.netframework.referenceassemblies\\1.0.0\\microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
     "C:\\Users\\bib\\.nuget\\packages\\microsoft.netframework.referenceassemblies.net472\\1.0.0\\microsoft.netframework.referenceassemblies.net472.1.0.0.nupkg.sha512",

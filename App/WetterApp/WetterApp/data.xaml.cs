@@ -14,6 +14,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Toolkit.Uwp.Notifications;
+using System.Windows.Interop;
+using System.Runtime.InteropServices;
+using System.Windows.Threading;
 
 
 namespace WetterApp
@@ -30,14 +33,20 @@ namespace WetterApp
 		public string ApiLanguage { get; set; }
 
 
-		public data(string city)
+
+   
+
+        public data(string city)
 		{
 			InitializeComponent();
 
 			GetInformation(city);
 		}
 
-		private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
+
+
+
+        private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
 
 
 		private async void GetInformation(string city)
