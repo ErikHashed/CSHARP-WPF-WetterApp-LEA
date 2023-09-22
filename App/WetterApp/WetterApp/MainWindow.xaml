@@ -7,11 +7,18 @@
         
         ResizeMode="NoResize" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
 
-        <Grid>
-            <!--<Image x:Name="Bild" Margin="93,232,350,39" Source="/Screenshot (1).png" />-->
+  
+
+    <Grid>
+        
+        
+
+        <!--<Image x:Name="Bild" Margin="93,232,350,39" Source="/Screenshot (1).png" />-->
             <Label x:Name="location" HorizontalAlignment="Center" Height="100" Margin="10,10,10,10" VerticalAlignment="Top" Width="160"/>
             <Button Content="Suchen" HorizontalAlignment="Center" Margin="0,312,0,0" VerticalAlignment="Top" Tag="selectedCity" RenderTransformOrigin="9.185,-1.743" Height="30"/>
             <Button Content="Hinzufügen" HorizontalAlignment="Left" Margin="51,312,0,0" VerticalAlignment="Top" Click="openAddWindow" Height="30"/>
+            
+        <Border CornerRadius="20">
             <StackPanel>
                 <ListBox x:Name="rectangleList" Height="299" Width="788">
 
@@ -22,9 +29,10 @@
                     </ListBox.ItemsPanel>
                 </ListBox>
             </StackPanel>
-            <Button x:Name="settingsButton" Content="Settings" Margin="623,327,77,53" Click="settingsButton_Click"/>
-
-        </Grid>
+        </Border>
+        <Button x:Name="settingsButton" Content="Settings" Margin="623,327,77,53" Click="settingsButton_Click"/>
+        
+    </Grid>
     
 </Window>
 

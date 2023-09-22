@@ -9,17 +9,21 @@
         AllowsTransparency="True"
         WindowStyle="None"
         Title="Settings" Height="323" Width="455" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
+
+    
+
     <Grid>
-        <Border Background="Black" CornerRadius="20">
-            
+        <Border Background="White" CornerRadius="20">
+            <Label Content="Windgeschwindigkeit" Margin="310,133,22,0"/>
+
         </Border>
 
-        <ComboBox x:Name="languageListComboBox" HorizontalAlignment="Left" Margin="291,27,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="languageList_SelectionChanged">
+        <ComboBox x:Name="languageListComboBox"   HorizontalAlignment="Left" Margin="291,27,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="languageList_SelectionChanged">
             <ComboBoxItem Content="Deutsch" Tag="de"/>
             <ComboBoxItem Content="Englisch" Tag="en"/>
             <ComboBoxItem Content="mehr hier adden" Tag="sprache abkürzung hier"/>
         </ComboBox>
-        <ComboBox x:Name="temperatureUnitComboList" HorizontalAlignment="Left" Margin="290,86,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="temperatureUnitList_SelectionChanged">
+        <ComboBox x:Name="temperatureUnitComboList"   HorizontalAlignment="Left" Margin="290,86,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="temperatureUnitList_SelectionChanged">
             <ComboBoxItem Content="Celsius (C)" Tag="M"/>
             <ComboBoxItem Content="Fahrenheit (F)" Tag="I"/>
             <ComboBoxItem Content="Scientific (K)" Tag="S"/>
@@ -33,17 +37,8 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Button x:Name="ApplyButton" Content="Save" FontSize="16" Click="ApplyButton_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="42,144,357,143" FontFamily="Segoe UI Symbol" RenderTransformOrigin="0.521,-0.705">
-            <Button.Template>
-                <ControlTemplate TargetType="{x:Type Button}">
-                    <Border CornerRadius="20" Background="{TemplateBinding Background}" Padding="5">
-                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                    </Border>
-                </ControlTemplate>
-            </Button.Template>
-        </Button>
 
-        <CheckBox x:Name="windspeedCheckBox" Click="windspeedCheckBox_Click" Margin="429,297,0,0"></CheckBox>
-        
+        <CheckBox x:Name="windspeedCheckBox" Click="windspeedCheckBox_Click" Margin="290,136,139,161"></CheckBox>
+        <!--<ToggleButton x:Name="themeToggleButton" Content="Theme wechseln" Click="ToggleTheme_Click" Margin="25,162,330,103" />-->
     </Grid>
 </Window>

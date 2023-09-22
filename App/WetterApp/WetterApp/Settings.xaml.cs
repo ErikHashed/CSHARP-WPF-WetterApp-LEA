@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Drawing;
+//using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -24,16 +24,55 @@ namespace WetterApp
 		public static string SettingsFilePath { get { return settingsFilePath; } }
 
 
-		public static string ApiLanguage { get; set; }
-		public static string MeasureUnit { get; set; }
-		public static bool Windspeed { get; set; }
+        public static string ApiLanguage { get; set; } = "de"; // Standardwert ist Deutsch
+        public static string MeasureUnit { get; set; } = "metric"; // Standardwert für metrische Einheiten
+        public static bool Windspeed { get; set; } = true; // Standardwert für Windspeed
 
 
+		private int currentThemeIndex = 0;
+		private List<ResourceDictionary> themes = new List<ResourceDictionary>();
 
 		public Settings()
 		{
-			InitializeComponent();
+            InitializeComponent();
+
+			//themes.Add(new ResourceDictionary() { Source = new Uri("Theme1.xaml", UriKind.Relative) });
+			//themes.Add(new ResourceDictionary() { Source = new Uri("Theme2.xaml", UriKind.Relative) });
+			//themes.Add(new ResourceDictionary() { Source = new Uri("Theme3.xaml", UriKind.Relative) });
+			//themes.Add(new ResourceDictionary() { Source = new Uri("Theme4.xaml", UriKind.Relative) });
+
+			//ApplyTheme(themes[currentThemeIndex]);
 		}
+
+		//private void ToggleTheme_Click(object sender, RoutedEventArgs e)
+		//{
+		//	// Wechsele zwischen den Themes
+		//	if ((Brush)this.Resources["BackgroundColor"] == Brushes.White)
+		//	{
+		//		this.Resources["BackgroundColor"] = new SolidColorBrush(Colors.Black);
+		//		this.Resources["ForegroundColor"] = new SolidColorBrush(Colors.Red);
+		//	}
+		//	else
+		//	{
+		//		this.Resources["BackgroundColor"] = new SolidColorBrush(Colors.White);
+		//		this.Resources["ForegroundColor"] = new SolidColorBrush(Colors.Blue);
+		//	}
+		//}
+
+
+
+
+
+
+		//private void ApplyTheme(ResourceDictionary theme)
+		//{
+		//	// Entferne alle bisherigen Themes
+		//	Application.Current.Resources.MergedDictionaries.Clear();
+
+		//	// Füge das ausgewählte Theme hinzu
+		//	Application.Current.Resources.MergedDictionaries.Add(theme);
+		//}
+
 
 		private void languageList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
 		{
@@ -42,15 +81,20 @@ namespace WetterApp
 				string selectedOption = ((System.Windows.Controls.ComboBoxItem)languageListComboBox.SelectedItem).Tag.ToString();
 				MessageBox.Show($"Ausgewählt: {selectedOption}");
 				ApiLanguage = selectedOption;
-			}
+                
+            }
 		}
 
 		private void BackButton_Click(object sender, RoutedEventArgs e)
 		{
-			Close();
-		}
+			SaveSetting();
+			
+            MainWindow newWindow = new MainWindow();
+            newWindow.Show();
+            Close();
+        }
 
-		private void ApplyButton_Click(object sender, RoutedEventArgs e)
+		private void SaveSetting()
 		{
 			try
 			{
@@ -67,6 +111,7 @@ namespace WetterApp
 			{
 				Console.WriteLine($"Error saving settings: {ex.Message}");
 			}
+			
 		}
 
 		private void temperatureUnitList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
@@ -76,7 +121,8 @@ namespace WetterApp
 				string selectedOption = ((System.Windows.Controls.ComboBoxItem)temperatureUnitComboList.SelectedItem).Tag.ToString();
 				MessageBox.Show($"Ausgewählt: {selectedOption}");
 				MeasureUnit = selectedOption;
-			}
+                
+            }
 		}
 
 		private void windspeedCheckBox_Click(object sender, RoutedEventArgs e)
@@ -94,5 +140,10 @@ namespace WetterApp
 				Windspeed = selectedOption;
 			}
 		}
-	}
+   //     private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+   //     {
+			//SaveSetting(); // Speichert alle credentials wenn man die Seite bzw. das Programm schließt
+           
+   //     }
+    }
 }

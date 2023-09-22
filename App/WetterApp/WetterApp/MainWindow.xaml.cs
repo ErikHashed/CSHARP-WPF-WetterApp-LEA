@@ -61,8 +61,10 @@ namespace WetterApp
         private void HotKeyPressed()
         {
             Settings newWindow = new Settings();
+            Close();
             newWindow.Show();
             
+
 
         }
 
@@ -99,7 +101,7 @@ namespace WetterApp
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
     
 
-    public async void openAddWindow(object sender, RoutedEventArgs e)
+        public async void openAddWindow(object sender, RoutedEventArgs e)
         {
             InputDialog inputDialog = new InputDialog();
             inputDialog.ShowDialog();
@@ -333,16 +335,14 @@ namespace WetterApp
                     MessageBox.Show(ex.Message);
                 }
             }
-
-
-			
-
 		}
 
 		private void settingsButton_Click(object sender, RoutedEventArgs e)
 		{
+            
             Settings settingsWindow = new Settings();
             settingsWindow.Show();
-		}
+            Close();
+        }
 	}
 }
