@@ -26,7 +26,6 @@ namespace WetterApp
 {
     public partial class MainWindow : Window
     {
-        private static string selectedCity = null;
         public static string name = null;
 
         public static string city = null;
@@ -215,19 +214,53 @@ namespace WetterApp
 
 		}
 
-        async void LoadData()
+		//public static Settings LoadSettings()
+		//{
+		//	Settings settings = new Settings();
+
+		//	if (File.Exists(Settings.SettingsFilePath))
+		//	{
+		//		string[] lines = File.ReadAllLines(Settings.SettingsFilePath);
+
+		//		foreach (string line in lines)
+		//		{
+		//			string[] parts = line.Split('=');
+
+		//			if (parts.Length == 2)
+		//			{
+		//				string key = parts[0].Trim();
+		//				string value = parts[1].Trim();
+
+		//				settings.Values[key] = value;
+		//			}
+		//		}
+		//	}
+
+		//	return settings;
+		//}
+
+		async void LoadData()
         {
 			try
 			{
                 if (File.Exists(Settings.SettingsFilePath))
                 {
                     string[] settingsLines = File.ReadAllLines(Settings.SettingsFilePath);
+                    string[] parts;
 
                     // Parse the lines and populate the AppSettings object
 
-                    Settings.ApiLanguage = settingsLines[0];
-                    Settings.MeasureUnit = settingsLines[1];
-                    string[] parts = settingsLines[2].Split('=');
+                    parts = settingsLines[0].Split('=');
+                    if (parts.Length == 2)
+                    {
+                        Settings.ApiLanguage = parts[1];
+                    }
+                    parts = settingsLines[1].Split('=');
+                    if (parts.Length == 2)
+                    {
+                        Settings.MeasureUnit = parts[1];
+                    }
+                    parts = settingsLines[2].Split('=');
                     if(parts.Length == 2)
                     {
                         Settings.Windspeed = bool.Parse(parts[1]);
