@@ -95,4 +95,3 @@ C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\Se
 C:\Users\bib\Documents\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\Settings.baml
 \\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\Settings.g.cs
 \\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\Settings.baml
-\\00E04C68006F\Users\bib\OneDrive - bib & FHDW\Dokumente\GitHub\WetterApp-LEA\App\WetterApp\WetterApp\obj\Debug\GeneratedInternalTypeHelper.g.cs

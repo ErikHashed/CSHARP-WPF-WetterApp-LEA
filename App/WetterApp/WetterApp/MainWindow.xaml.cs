@@ -110,6 +110,7 @@ namespace WetterApp
             name = inputDialog.UserInput;
             string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang=de";
             string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={name}&key={apiKey}&lang=de";
+            //rectangleList.Items.Clear();
 
             try
             {
@@ -172,12 +173,26 @@ namespace WetterApp
                                 IsHitTestVisible = false
                             };
 
+                            Button removeButton = new Button
+                            {
+                                Content = "Entfernen",
+                                Width = 80,
+                                Height = 50,
+                                Tag = newRectangle.Name,
+                                Background = Brushes.LightBlue,
+                                Margin = new Thickness(0, 186, 0, 0),
+                                BorderBrush = Brushes.Black,
+                            };
+
+                            removeButton.Click += removeButton_Click;
+
                             Grid grid = new Grid();
                             grid.Children.Add(newRectangle);
                             grid.Children.Add(nameLabel);
                             grid.Children.Add(weatherIcon);
                             grid.Children.Add(temperature);
                             grid.Children.Add(description);
+                            grid.Children.Add(removeButton);
 
                             StackPanel stackPanel = new StackPanel
                             {
@@ -216,31 +231,7 @@ namespace WetterApp
 
         }
 
-        //public static Settings LoadSettings()
-        //{
-        //	Settings settings = new Settings();
-
-        //	if (File.Exists(Settings.SettingsFilePath))
-        //	{
-        //		string[] lines = File.ReadAllLines(Settings.SettingsFilePath);
-
-        //		foreach (string line in lines)
-        //		{
-        //			string[] parts = line.Split('=');
-
-        //			if (parts.Length == 2)
-        //			{
-        //				string key = parts[0].Trim();
-        //				string value = parts[1].Trim();
-
-        //				settings.Values[key] = value;
-        //			}
-        //		}
-        //	}
-
-        //	return settings;
-        //}
-
+        
         async void LoadData()
         {
             rectangleList.Items.Clear();
@@ -347,9 +338,12 @@ namespace WetterApp
                             Button removeButton = new Button
                             {
                                 Content = "Entfernen",
-                                Width = 120,
-                                Height = 120,
-                                Tag = newRectangle.Name
+                                Width = 80,
+                                Height = 50,
+                                Tag = newRectangle.Name,
+                                Background = Brushes.LightBlue,
+                                Margin = new Thickness(0,186,0,0),
+                                BorderBrush = Brushes.Black,
                             };
 
                             removeButton.Click += removeButton_Click;
@@ -365,6 +359,7 @@ namespace WetterApp
                             StackPanel stackPanel = new StackPanel
                             {
                                 Orientation = Orientation.Vertical
+                                
                             };
 
                             stackPanel.Children.Add(grid);
@@ -422,5 +417,9 @@ namespace WetterApp
             LoadData();
 		}
 
+        private void CloseButtonClick(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

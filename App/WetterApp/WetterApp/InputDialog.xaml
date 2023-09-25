@@ -8,7 +8,10 @@
         Title="InputDialog" Height="165" Width="200"
         ResizeMode="NoResize" Topmost="True" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
     <Grid>
-        <TextBox x:Name="inputTextBox" Margin="10,10,10,67"/>
-        <Button Content="OK" HorizontalAlignment="Center" Margin="0,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.329,0.472" Click="okClick"/>
+        <TextBox IsTabStop="False" x:Name="inputTextBox" Margin="10,10,10,67"/>
+        <Button Content="OK" HorizontalAlignment="Center" Margin="0,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.329,0.472" Click="okClick">
+            
+        </Button>
+                
     </Grid>
 </Window>
