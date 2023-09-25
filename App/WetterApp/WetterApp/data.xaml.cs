@@ -31,21 +31,14 @@ namespace WetterApp
 	public partial class data : Window
 	{
 		public string ApiLanguage { get; set; }
-
-
-
-   
-
         public data(string city)
 		{
 			InitializeComponent();
 
 			GetInformation(city);
+
+			WeatherAlert(city);
 		}
-
-
-
-
         private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
 
 
@@ -201,41 +194,38 @@ namespace WetterApp
 			}
 		}
 
-		private async Task servereWeatherWarning(string city)
+		async void WeatherAlert(string city)
 		{
-			string url = $"https://api.weatherbit.io/v2.0/alerts?city={city}&key={apiKey}";
-
+			string weatherAlertApi = $"https://api.weatherbit.io/v2.0/alerts?city={city}&key={apiKey}";
 			try
 			{
 				using (HttpClient client = new HttpClient())
 				{
-					HttpResponseMessage response = await client.GetAsync(url);
+					HttpResponseMessage response = await client.GetAsync(weatherAlertApi);
 
 					if (response.IsSuccessStatusCode)
 					{
-						string jsonn = await response.Content.ReadAsStringAsync();
-						dynamic data = JObject.Parse(jsonn);
+						string json = await response.Content.ReadAsStringAsync();
+						dynamic data = JObject.Parse(json);
 
-
-						if (data?.dataa != null && data.Count > 0)
+						if(data.alerts != null)
 						{
-							string unweatherName = data[0].title;
-							//unweatherTextBox.Text = unweatherName;
-							MessageBox.Show("Wir haben DAAAATEEEEEN");
+							string alerts = data.alerts[0].description;
+							new ToastContentBuilder()
+							.AddArgument("action", "viewConversation")
+							.AddArgument("conversationId", 9813)
+							.AddHeader("1", "UNWETTER!", "")
+							.AddText(alerts)
+							.Show();
 						}
-
-						//string unweatherName = data.data[0].title;
-						//unweatherTextBox.Text = unweatherName;
+						
 					}
 				}
 			}
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message);
+				//MessageBox.Show(ex.Message);
 			}
-
-
-
 		}
 
 		private void unwetterClickTemp(object sender, RoutedEventArgs e)

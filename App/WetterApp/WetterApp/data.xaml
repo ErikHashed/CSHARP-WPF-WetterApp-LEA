@@ -37,5 +37,6 @@
         </ListBox>
         <Label Content="7-Tage-Vorhersage" HorizontalAlignment="Left" BorderBrush="Transparent" BorderThickness="0" Margin="28,193,0,0" VerticalAlignment="Top" Width="128" Height="25"/>
         <Label x:Name="nameLabel" Content="" HorizontalAlignment="Left" Margin="182,10,0,0" VerticalAlignment="Top" Width="120" Height="58" FontSize="24"/>
+        <Label x:Name="tmp" Margin="0,0,290,576"></Label>
     </Grid>
 </Window>

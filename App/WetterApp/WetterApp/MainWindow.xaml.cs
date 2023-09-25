@@ -21,6 +21,8 @@ using System.IO;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
+using System.Security.Policy;
+using System.Linq;
 
 namespace WetterApp
 {
@@ -29,7 +31,7 @@ namespace WetterApp
         public static string name = null;
 
         public static string city = null;
-		private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
+        private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
         private string citiesFilePath = $"../../files/cities.txt";
 
 
@@ -40,7 +42,7 @@ namespace WetterApp
         public MainWindow()
         {
             InitializeComponent();
-            
+
             LoadData();
 
             Loaded += (s, e) =>
@@ -62,7 +64,7 @@ namespace WetterApp
             Settings newWindow = new Settings();
             Close();
             newWindow.Show();
-            
+
 
 
         }
@@ -98,7 +100,7 @@ namespace WetterApp
 
         [DllImport("user32.dll")]
         private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
-    
+
 
         public async void openAddWindow(object sender, RoutedEventArgs e)
         {
@@ -109,7 +111,7 @@ namespace WetterApp
             string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang=de";
             string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={name}&key={apiKey}&lang=de";
 
-			try
+            try
             {
                 using (HttpClient client = new HttpClient())
                 {
@@ -121,12 +123,12 @@ namespace WetterApp
                     {
                         if (!string.IsNullOrEmpty(name))
                         {
-							string json = await response.Content.ReadAsStringAsync();
+                            string json = await response.Content.ReadAsStringAsync();
                             string forecastJson = await responseForecast.Content.ReadAsStringAsync();
-							dynamic data = JObject.Parse(json);
+                            dynamic data = JObject.Parse(json);
                             dynamic forecastData = JObject.Parse(forecastJson);
 
-							Rectangle newRectangle = new Rectangle
+                            Rectangle newRectangle = new Rectangle
                             {
                                 Width = 200,
                                 Height = 280,
@@ -165,9 +167,9 @@ namespace WetterApp
                             {
                                 Content = $"{data.data[0].weather.description} {forecastData.data[0].min_temp}° / {forecastData.data[0].max_temp}°",
                                 Width = 150,
-                                
+
                                 Height = 172,
-                                IsHitTestVisible=false
+                                IsHitTestVisible = false
                             };
 
                             Grid grid = new Grid();
@@ -201,48 +203,49 @@ namespace WetterApp
             {
                 MessageBox.Show(ex.Message);
             }
-		}
+        }
 
 
-		void Rectangle_Click(object sender, RoutedEventArgs e)
-		{
-			Rectangle clickedRectangle = (Rectangle)sender;
-			//Label nameLabel = ((Grid)clickedRectangle.Parent).Children[1] as Label;
-
-			data window = new data(clickedRectangle.Name);
-			window.Show();
-
-		}
-
-		//public static Settings LoadSettings()
-		//{
-		//	Settings settings = new Settings();
-
-		//	if (File.Exists(Settings.SettingsFilePath))
-		//	{
-		//		string[] lines = File.ReadAllLines(Settings.SettingsFilePath);
-
-		//		foreach (string line in lines)
-		//		{
-		//			string[] parts = line.Split('=');
-
-		//			if (parts.Length == 2)
-		//			{
-		//				string key = parts[0].Trim();
-		//				string value = parts[1].Trim();
-
-		//				settings.Values[key] = value;
-		//			}
-		//		}
-		//	}
-
-		//	return settings;
-		//}
-
-		async void LoadData()
+        void Rectangle_Click(object sender, RoutedEventArgs e)
         {
-			try
-			{
+            Rectangle clickedRectangle = (Rectangle)sender;
+            //Label nameLabel = ((Grid)clickedRectangle.Parent).Children[1] as Label;
+
+            data window = new data(clickedRectangle.Name);
+            window.Show();
+
+        }
+
+        //public static Settings LoadSettings()
+        //{
+        //	Settings settings = new Settings();
+
+        //	if (File.Exists(Settings.SettingsFilePath))
+        //	{
+        //		string[] lines = File.ReadAllLines(Settings.SettingsFilePath);
+
+        //		foreach (string line in lines)
+        //		{
+        //			string[] parts = line.Split('=');
+
+        //			if (parts.Length == 2)
+        //			{
+        //				string key = parts[0].Trim();
+        //				string value = parts[1].Trim();
+
+        //				settings.Values[key] = value;
+        //			}
+        //		}
+        //	}
+
+        //	return settings;
+        //}
+
+        async void LoadData()
+        {
+            rectangleList.Items.Clear();
+            try
+            {
                 if (File.Exists(Settings.SettingsFilePath))
                 {
                     string[] settingsLines = File.ReadAllLines(Settings.SettingsFilePath);
@@ -261,22 +264,22 @@ namespace WetterApp
                         Settings.MeasureUnit = parts[1];
                     }
                     parts = settingsLines[2].Split('=');
-                    if(parts.Length == 2)
+                    if (parts.Length == 2)
                     {
                         Settings.Windspeed = bool.Parse(parts[1]);
                     }
-				}
-				else
-				{
-					MessageBox.Show("Settingsdatei nicht gefunden!");
-				}
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine($"Error loading settings: {ex.Message}");
-			}
+                }
+                else
+                {
+                    MessageBox.Show("Settingsdatei nicht gefunden!");
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error loading settings: {ex.Message}");
+            }
 
-			string[] lines = File.ReadAllLines(citiesFilePath);
+            string[] lines = File.ReadAllLines(citiesFilePath);
 
 
             for (int i = 0; i < lines.Length; i++)
@@ -341,12 +344,23 @@ namespace WetterApp
                                 IsHitTestVisible = false
                             };
 
+                            Button removeButton = new Button
+                            {
+                                Content = "Entfernen",
+                                Width = 120,
+                                Height = 120,
+                                Tag = newRectangle.Name
+                            };
+
+                            removeButton.Click += removeButton_Click;
+
                             Grid grid = new Grid();
                             grid.Children.Add(newRectangle);
                             grid.Children.Add(nameLabel);
                             grid.Children.Add(weatherIcon);
                             grid.Children.Add(temperature);
                             grid.Children.Add(description);
+                            grid.Children.Add(removeButton);
 
                             StackPanel stackPanel = new StackPanel
                             {
@@ -368,14 +382,45 @@ namespace WetterApp
                     MessageBox.Show(ex.Message);
                 }
             }
-		}
+        }
 
-		private void settingsButton_Click(object sender, RoutedEventArgs e)
-		{
-            
+        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        {
+
             Settings settingsWindow = new Settings();
             settingsWindow.Show();
             Close();
         }
-	}
+	    
+        void removeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Button btn = (Button)sender;
+
+            List<string> lines = File.ReadAllLines(citiesFilePath).ToList();
+
+			int indexToRemove = -1;
+
+
+			for (int i = 0; i < lines.Count; i++)
+            {
+                if(lines[i].Contains((string)btn.Tag))
+                {
+					indexToRemove = i;
+					break;
+				}
+
+            }
+
+			if (indexToRemove >= 0)
+			{
+				lines.RemoveAt(indexToRemove);
+
+				// Write the updated lines back to the file
+				File.WriteAllLines(citiesFilePath, lines);
+				MessageBox.Show("Line containing the target string removed successfully.");
+			}
+            LoadData();
+		}
+
+    }
 }

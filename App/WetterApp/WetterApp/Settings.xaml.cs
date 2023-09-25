@@ -23,10 +23,9 @@ namespace WetterApp
 		private static string settingsFilePath = $"../../files/settings.txt";
 		public static string SettingsFilePath { get { return settingsFilePath; } }
 
-		//public Dictionary<string, string> Values { get; set; } = new Dictionary<string, string>();
-		public static string ApiLanguage { get; set; } = "de"; // Standardwert ist Deutsch
-		public static string MeasureUnit { get; set; } = "M"; // Standardwert für metrische Einheiten
-		public static bool Windspeed { get; set; } = true; // Standardwert für Windspeed
+		public static string ApiLanguage { get; set; }
+		public static string MeasureUnit { get; set; }
+		public static bool Windspeed { get; set; }
 
 
 		//private int currentThemeIndex = 0;
@@ -114,7 +113,6 @@ namespace WetterApp
 			{
 				Console.WriteLine($"Error saving settings: {ex.Message}");
 			}
-			
 		}
 
 		private void temperatureUnitList_SelectionChanged(object sender, System.Windows.Controls.SelectionChangedEventArgs e)
