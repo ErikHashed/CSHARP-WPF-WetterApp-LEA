@@ -141,5 +141,28 @@ namespace WetterApp
 				Windspeed = selectedOption;
 			}
 		}
-    }
+
+		private void CloseButtonClick(object sender, RoutedEventArgs e)
+		{
+			Close();
+		}
+
+		private void windspeedCheckBox_Checked(object sender, RoutedEventArgs e)
+		{
+			//windspeedCheckBox.IsChecked = true;
+
+            if (windspeedCheckBox.IsChecked == true)
+            {
+                bool selectedOption = true;
+                MessageBox.Show($"Ausgewählt: {selectedOption}");
+                Windspeed = selectedOption;
+            }
+            else
+            {
+                bool selectedOption = false;
+                MessageBox.Show($"Ausgewählt: {selectedOption}");
+                Windspeed = selectedOption;
+            }
+        }
+	}
 }

@@ -228,15 +228,16 @@ namespace WetterApp
 			}
 		}
 
-		private void unwetterClickTemp(object sender, RoutedEventArgs e)
+		
+
+		private void CloseButtonClick(object sender, RoutedEventArgs e)
 		{
-			//new ToastContentBuilder()
-			//.AddArgument("action", "viewConversation")
-			//.AddArgument("conversationId", 9813)
-			//.AddHeader("1","UNWETTER!", "awiodzuawzgdzg")
-			//.AddText("Ich hab nen Steifen")
-			//.AddText("Ich bin gail!")
-			//.Show();
+			Close();
+		}
+
+		private void weatherforecastList_SelectionChanged(object sender, SelectionChangedEventArgs e)
+		{
+
 		}
 	}
 

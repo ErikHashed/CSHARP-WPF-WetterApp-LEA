@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WetterApp"
         mc:Ignorable="d"
-        Background="Transparent"
+        Background="LightBlue"
         AllowsTransparency="True"
         WindowStyle="None"
         Title="Settings" Height="323" Width="455" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
@@ -13,10 +13,10 @@
     
 
     <Grid>
-        <Border Background="White" CornerRadius="20">
+        
             <Label Content="Windgeschwindigkeit" Margin="310,133,22,0"/>
 
-        </Border>
+       
 
         <ComboBox x:Name="languageListComboBox"   HorizontalAlignment="Left" Margin="291,27,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="languageList_SelectionChanged">
             <ComboBoxItem Content="Deutsch" Tag="de"/>
@@ -28,7 +28,7 @@
             <ComboBoxItem Content="Fahrenheit (F)" Tag="I"/>
             <ComboBoxItem Content="Scientific (K)" Tag="S"/>
         </ComboBox>
-        <Button Name="BackButton" Content="&#8617;" FontSize="16" Click="BackButton_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="25,23,374,264" FontFamily="Segoe UI Symbol" RenderTransformOrigin="0.521,-0.705">
+        <Button Name="BackButton" Content="&#8617;" FontSize="16" Click="BackButton_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="10,10,389,277" FontFamily="Segoe UI Symbol" RenderTransformOrigin="0.521,-0.705">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="20" Background="{TemplateBinding Background}" Padding="5">
@@ -38,7 +38,17 @@
             </Button.Template>
         </Button>
 
-        <CheckBox x:Name="windspeedCheckBox" Click="windspeedCheckBox_Click" Margin="290,136,139,161"></CheckBox>
+        <CheckBox x:Name="windspeedCheckBox" Click="windspeedCheckBox_Click" Margin="290,136,139,161" Checked="windspeedCheckBox_Checked"></CheckBox>
         <!--<ToggleButton x:Name="themeToggleButton" Content="Theme wechseln" Click="ToggleTheme_Click" Margin="25,162,330,103" />-->
+
+        <Button Width="30" Height="30" Content="X" FontSize="16" FontWeight="Bold" Foreground="White" Background="Red" BorderBrush="Transparent" Click="CloseButtonClick" Margin="416,10,9,283">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
     </Grid>
 </Window>

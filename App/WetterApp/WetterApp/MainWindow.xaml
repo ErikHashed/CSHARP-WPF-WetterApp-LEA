@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:av="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="av" x:Class="WetterApp.MainWindow"
         Title="Wetter App" Height="450" Width="800"
-         Background="Transparent"
+         Background="#FFC5F7FF"
         AllowsTransparency="True"
         WindowStyle="None"
         
@@ -12,10 +12,10 @@
 
 
     <Grid>
-
-        <Border CornerRadius="20" Background="White">
+        
+        <Border BorderBrush="White">
             <StackPanel>
-                <ListBox x:Name="rectangleList" Height="352" Width="765">
+                <ListBox x:Name="rectangleList" Height="352" Width="765" BorderBrush="#FFC5F7FF" Background="#FFC5F7FF">
 
                     <ListBox.ItemsPanel>
                         <ItemsPanelTemplate>
@@ -24,9 +24,9 @@
                     </ListBox.ItemsPanel>
                 </ListBox>
             </StackPanel>
+
         </Border>
 
-       
         <Label x:Name="location" HorizontalAlignment="Center" Height="100" Margin="10,10,10,10" VerticalAlignment="Top" Width="160"/>
 
         <Button x:Name="settingsButton" Content="&#9881;" FontSize="24" Click="settingsButton_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="666,362,34,35" FontFamily="Segoe UI Symbol" RenderTransformOrigin="0.521,-0.705">
@@ -48,7 +48,7 @@
         </Button>
 
         <!--<Button Content="Hinzufügen" HorizontalAlignment="Left" Margin="51,362,0,0" VerticalAlignment="Top" Click="openAddWindow" Height="46"/>-->
-        <Button Name="Hinzufügen" Content="+" FontSize="24" Click="openAddWindow" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="59,362,657,35" FontFamily="Segoe UI Symbol" RenderTransformOrigin="0.521,-0.705">
+        <Button Name="Hinzufügen" Content="+" FontSize="36" Click="openAddWindow" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="61,362,641,35" FontFamily="Segoe UI Symbol" RenderTransformOrigin="0.521,-0.705">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="20" Background="{TemplateBinding Background}" Padding="5">

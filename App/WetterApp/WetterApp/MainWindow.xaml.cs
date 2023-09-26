@@ -143,6 +143,7 @@ namespace WetterApp
                                 Source = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png")),
                                 Width = 120,
                                 Height = 120,
+                                Margin = new Thickness(0, 0, 0, 20),
                             };
 
                             Label nameLabel = new Label
@@ -160,7 +161,8 @@ namespace WetterApp
                                 FontSize = 24,
                                 Width = 65,
                                 HorizontalAlignment = HorizontalAlignment.Center,
-                                Height = 232,
+                                Margin = new Thickness(0,0,0,30),
+                                Height = 30,
                                 IsHitTestVisible = false
                             };
 
@@ -180,7 +182,7 @@ namespace WetterApp
                                 Height = 50,
                                 Tag = newRectangle.Name,
                                 Background = Brushes.LightBlue,
-                                Margin = new Thickness(0, 186, 0, 0),
+                                Margin = new Thickness(0, 200, 0, 0),
                                 BorderBrush = Brushes.Black,
                             };
 
@@ -296,9 +298,10 @@ namespace WetterApp
                             Rectangle newRectangle = new Rectangle
                             {
                                 Width = 200,
-                                Height = 280,
+                                Height = 340,
                                 Fill = Brushes.LightBlue,
                                 HorizontalAlignment = HorizontalAlignment.Right,
+                                
                                 Name = lines[i],
                             };
 
@@ -324,7 +327,10 @@ namespace WetterApp
                                 FontSize = 24,
                                 Width = 70,
                                 Height = 222,
-                                IsHitTestVisible = false
+                                IsHitTestVisible = false,
+                                HorizontalAlignment= HorizontalAlignment.Center,
+                                
+                                
                             };
 
                             Label description = new Label
@@ -332,14 +338,16 @@ namespace WetterApp
                                 Content = $"{data.data[0].weather.description} {forecastData.data[0].min_temp}° / {forecastData.data[0].max_temp}°",
                                 //Width = 100,
                                 Height = 172,
-                                IsHitTestVisible = false
+                                IsHitTestVisible = false,
+                                HorizontalAlignment = HorizontalAlignment.Center,
+                                
                             };
 
                             Button removeButton = new Button
                             {
                                 Content = "Entfernen",
-                                Width = 80,
-                                Height = 50,
+                                Width = 70,
+                                Height = 40,
                                 Tag = newRectangle.Name,
                                 Background = Brushes.LightBlue,
                                 Margin = new Thickness(0,186,0,0),
@@ -421,5 +429,7 @@ namespace WetterApp
         {
             Close();
         }
+
+        
     }
 }
