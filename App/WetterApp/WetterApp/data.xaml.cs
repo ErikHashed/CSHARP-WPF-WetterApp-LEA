@@ -67,9 +67,6 @@ namespace WetterApp
 						string beschreibung = data.data[0].weather.description;
 						int temperatur = data.data[0].temp;
 						string wettername = data.data[0].weather.name;
-						string uhrzeit = data.data[0].ob_time;
-						string latte = data.data[0].lat;       //insider Variable
-						string longschlong = data.data[0].lon; //insider Variable
 						string icon = data.data[0].weather.icon;
 						nameLabel.Content = city;
 						
@@ -78,33 +75,16 @@ namespace WetterApp
 						imgBrush.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{icon}.png"));
 						weatherImage.Fill = imgBrush;
 
-
-
                         List<WeatherForecast> forecasts = new List<WeatherForecast>();
 
-                      
                         forecasts.Add(new WeatherForecast
                         {
                             Temperature = $"{data.data[0].min_temp} / {data.data[0].max_temp}",
                             IconPath = $"pack://application:,,,/images/{data.data[0].weather.icon}.png"
                         });
 
-
-                       // weatherforecastList.ItemsSource = forecasts;
-
-
-
                         txtTemp.Text = temperatur + "°C";
-						if(Settings.Windspeed == true) 
-						{
-							double windgeschwindigkeit = data.data[0].wind_spd;
-							txtErgebnis.Text = $"Windspeed = {windgeschwindigkeit}\n";
-						}
 						
-					}
-					else
-					{
-						//txtErgebnis.Text = "Fehler beim Abrufen der Stadt.";
 					}
 
 				}
@@ -116,8 +96,6 @@ namespace WetterApp
 					{
 						string json = await responseForecast.Content.ReadAsStringAsync();
 						dynamic data = JObject.Parse(json);
-
-						
 
 						List<WeatherForecast> forecasts = new List<WeatherForecast>();
 

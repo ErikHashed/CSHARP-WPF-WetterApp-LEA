@@ -119,106 +119,120 @@ namespace WetterApp
 
                     HttpResponseMessage responseForecast = await client.GetAsync(forecastUrl);
 
-                    if (response.IsSuccessStatusCode)
-                    {
-                        if (!string.IsNullOrEmpty(name))
-                        {
-                            string json = await response.Content.ReadAsStringAsync();
-                            string forecastJson = await responseForecast.Content.ReadAsStringAsync();
-                            dynamic data = JObject.Parse(json);
-                            dynamic forecastData = JObject.Parse(forecastJson);
+					if (response.IsSuccessStatusCode)
+					{
+						string json = await response.Content.ReadAsStringAsync();
+						string forecastJson = await responseForecast.Content.ReadAsStringAsync();
+						dynamic data = JObject.Parse(json);
+						dynamic forecastData = JObject.Parse(forecastJson);
 
-                            Rectangle newRectangle = new Rectangle
-                            {
-                                Width = 200,
-                                Height = 280,
-                                Fill = Brushes.LightBlue,
-                                HorizontalAlignment = HorizontalAlignment.Right,
-                                Name = name,
-                            };
+						Rectangle newRectangle = new Rectangle
+						{
+							Width = 200,
+							Height = 340,
+							Fill = Brushes.LightBlue,
+							HorizontalAlignment = HorizontalAlignment.Right,
 
-                            Image weatherIcon = new Image
-                            {
-                                Source = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png")),
-                                Width = 120,
-                                Height = 120,
-                                Margin = new Thickness(0, 0, 0, 20),
-                            };
+							Name = name,
+						};
 
-                            Label nameLabel = new Label
-                            {
-                                Content = name,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Top, // Oben ausrichten
-                                FontSize = 20,
-                                IsHitTestVisible = false
-                            };
+						Image weatherIcon = new Image
+						{
+							Source = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png")),
+							Width = 120,
+							Height = 120,
+						};
 
-                            Label temperature = new Label
-                            {
-                                Content = $"{data.data[0].temp}°",
-                                FontSize = 24,
-                                Width = 65,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                Margin = new Thickness(0,100,0,0),
-                                Height = 222,
-                                IsHitTestVisible = false
-                                
-                            };
+						Label nameLabel = new Label
+						{
+							Content = name,
+							HorizontalAlignment = HorizontalAlignment.Center,
+							VerticalAlignment = VerticalAlignment.Top, // Oben ausrichten
+							FontSize = 20,
+							IsHitTestVisible = false
+						};
 
-                            Label description = new Label
-                            {
-                                Content = $"{data.data[0].weather.description} {forecastData.data[0].min_temp}° / {forecastData.data[0].max_temp}°",
-                                Width = 150,
-                                Margin = new Thickness(0,70,0,0),
-                                Height = 172,
-                                IsHitTestVisible = false
-                            };
+						Label temperature = new Label
+						{
+							Content = $"{data.data[0].temp}°",
+							FontSize = 24,
+							Width = 70,
+							Height = 222,
+							IsHitTestVisible = false,
+							HorizontalAlignment = HorizontalAlignment.Center,
+							VerticalAlignment = VerticalAlignment.Top,
+							Margin = new Thickness(0, 34, 0, 0),
 
-                            Button removeButton = new Button
-                            {
-                                Content = "Entfernen",
-                                Width = 80,
-                                Height = 50,
-                                Tag = newRectangle.Name,
-                                Background = Brushes.LightBlue,
-                                Margin = new Thickness(0, 0, 0, 100),
-                                BorderBrush = Brushes.Black,
-                            };
 
-                            removeButton.Click += removeButton_Click;
+						};
 
-                            Grid grid = new Grid();
-                            grid.Children.Add(newRectangle);
-                            grid.Children.Add(nameLabel);
-                            grid.Children.Add(weatherIcon);
-                            grid.Children.Add(temperature);
-                            grid.Children.Add(description);
-                            grid.Children.Add(removeButton);
+						Label description = new Label
+						{
+							Content = $"{data.data[0].weather.description} {forecastData.data[0].min_temp}° / {forecastData.data[0].max_temp}°",
+							//Width = 100,
+							Height = 172,
+							IsHitTestVisible = false,
+							HorizontalAlignment = HorizontalAlignment.Center,
 
-                            grid.ColumnDefinitions.Add(new ColumnDefinition());
-                            grid.RowDefinitions.Add(new RowDefinition());
+						};
 
-                            
+						Button removeButton = new Button
+						{
+							Width = 70,
+							Height = 40,
+							Tag = newRectangle.Name,
+							Background = Brushes.LightBlue,
+							Margin = new Thickness(0, 186, 0, 20),
+							BorderBrush = Brushes.Black,
+							VerticalAlignment = VerticalAlignment.Bottom,
+						};
 
-                            StackPanel stackPanel = new StackPanel
-                            {
-                                Orientation = Orientation.Vertical
-                            };
 
-                            stackPanel.Children.Add(grid);
+						if (Settings.ApiLanguage == "de")
+						{
+							removeButton.Content = "Entfernen";
+						}
+						if (Settings.ApiLanguage == "en")
+						{
+							removeButton.Content = "Remove";
+						}
+						if (Settings.ApiLanguage == "fr")
+						{
+							removeButton.Content = "Retirer";
+						}
+						if (Settings.ApiLanguage == "es")
+						{
+							removeButton.Content = "Eliminar";
+						}
 
-                            rectangleList.Items.Add(stackPanel);
 
-                            // Fügen Sie das Click-Ereignis zum Rechteck hinzu
 
-                            newRectangle.MouseDown += Rectangle_Click;
-                            rectangleList.Items.Add(stackPanel);
+						removeButton.Click += removeButton_Click;
 
-                        }
-                    }
+						Grid grid = new Grid();
+						grid.Children.Add(newRectangle);
+						grid.Children.Add(nameLabel);
+						grid.Children.Add(weatherIcon);
+						grid.Children.Add(temperature);
+						grid.Children.Add(description);
+						grid.Children.Add(removeButton);
 
-                }
+						StackPanel stackPanel = new StackPanel
+						{
+							Orientation = Orientation.Vertical
+
+						};
+
+						stackPanel.Children.Add(grid);
+
+						// Add the stackPanel to your UI container once
+						rectangleList.Items.Add(stackPanel);
+
+						// Attach the event handler to the newRectangle
+						newRectangle.MouseDown += Rectangle_Click;
+					}
+
+				}
 
             }
             catch (Exception ex)
@@ -260,11 +274,6 @@ namespace WetterApp
                     if (parts.Length == 2)
                     {
                         Settings.MeasureUnit = parts[1];
-                    }
-                    parts = settingsLines[2].Split('=');
-                    if (parts.Length == 2)
-                    {
-                        Settings.Windspeed = bool.Parse(parts[1]);
                     }
                 }
                 else
@@ -352,7 +361,6 @@ namespace WetterApp
 
                             Button removeButton = new Button
                             {
-                                Content = "Entfernen",
                                 Width = 70,
                                 Height = 40,
                                 Tag = newRectangle.Name,
@@ -362,7 +370,27 @@ namespace WetterApp
                                 VerticalAlignment= VerticalAlignment.Bottom,
                             };
 
-                            removeButton.Click += removeButton_Click;
+
+							if (Settings.ApiLanguage == "de")
+							{
+								removeButton.Content = "Entfernen";
+							}
+							if (Settings.ApiLanguage == "en")
+							{
+								removeButton.Content = "Remove";
+							}
+							if (Settings.ApiLanguage == "fr")
+							{
+								removeButton.Content = "Retirer";
+							}
+							if (Settings.ApiLanguage == "es")
+							{
+								removeButton.Content = "Eliminar";
+							}
+
+
+
+							removeButton.Click += removeButton_Click;
 
                             Grid grid = new Grid();
                             grid.Children.Add(newRectangle);

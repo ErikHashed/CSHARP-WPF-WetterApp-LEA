@@ -1,3 +1,2 @@
-lang=en
-units=M
-windspeed=False
+lang=es
+units=I
