@@ -10,11 +10,12 @@
         WindowStyle="None"
         Title="Settings" Height="323" Width="455" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
     <Grid>
-        <Label Content="Sprache" Margin="72,21,313,277"></Label>
+        <Label x:Name="languageLabel" Margin="72,21,313,277"></Label>
         <ComboBox x:Name="languageListComboBox"   HorizontalAlignment="Left" Margin="47,51,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="languageList_SelectionChanged">
             <ComboBoxItem Content="Deutsch" Tag="de"/>
-            <ComboBoxItem Content="Englisch" Tag="en"/>
-            <ComboBoxItem Content="mehr hier adden" Tag="sprache abkürzung hier"/>
+            <ComboBoxItem Content="English" Tag="en"/>
+            <ComboBoxItem Content="French" Tag="fr"/>
+            <ComboBoxItem Content="Spanish" Tag="es"/>
         </ComboBox>
         <ComboBox x:Name="temperatureUnitComboList"   HorizontalAlignment="Left" Margin="47,126,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="temperatureUnitList_SelectionChanged">
             <ComboBoxItem Content="Celsius (C)" Tag="M"/>
@@ -41,6 +42,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Label Content="Messeinheit" Margin="60,96,301,202"/>
+        <Label x:Name="measureUnitLabel" Margin="60,96,301,202"/>
     </Grid>
 </Window>
