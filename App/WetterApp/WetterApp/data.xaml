@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="daten" Height="678" Width="427" Topmost="True" ResizeMode="NoResize" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
 
-    <Grid Margin="0,0,0,-302">
+    <Grid Margin="0,0,0,-354">
 
         <Grid.Background>
             <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
@@ -49,6 +49,15 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+
+
+        <Slider x:Name="timeSlider" Minimum="0" Maximum="24" Value="12" TickFrequency="1" IsSnapToTickEnabled="True" Margin="0,631,0,0"/>
+        <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,20">
+            <Run>Sonnenaufgang</Run>
+            <LineBreak/>
+            <Run>Sonnenuntergang</Run>
+        </TextBlock>
+        <TextBlock x:Name="timeDisplay" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,20,0,0"/>
 
     </Grid>
 </Window>

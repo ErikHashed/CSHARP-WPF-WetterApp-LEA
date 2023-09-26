@@ -24,18 +24,23 @@ namespace WetterApp
 
 	public class WeatherForecast
 	{
+
 		public string Temperature { get; set; }
 		public string IconPath { get; set; }
 	}
 
 	public partial class data : Window
 	{
-		public string ApiLanguage { get; set; }
+       
+        
+    public string ApiLanguage { get; set; }
         public data(string city)
 		{
 			InitializeComponent();
+           
+        
 
-			GetInformation(city);
+        GetInformation(city);
 
 			WeatherAlert(city);
 		}
