@@ -35,6 +35,7 @@ namespace WetterApp
 		{
             InitializeComponent();
 
+			LoadContent();
 			#region themes
 			//themes.Add(new ResourceDictionary() { Source = new Uri("Theme1.xaml", UriKind.Relative) });
 			//themes.Add(new ResourceDictionary() { Source = new Uri("Theme2.xaml", UriKind.Relative) });
@@ -70,9 +71,40 @@ namespace WetterApp
 		//}
 		#endregion
 
-
-		private void LoadContent()
+		void LoadContent()
 		{
+			try
+			{
+				if (ApiLanguage == "de")
+				{
+					languageListComboBox.SelectedIndex = 0;
+				}
+				if (ApiLanguage == "en")
+				{
+					languageListComboBox.SelectedIndex = 1;
+
+				}
+				if (ApiLanguage == "fr")
+				{
+					languageListComboBox.SelectedIndex = 2;
+
+				}
+				if (MeasureUnit == "M")
+				{
+					temperatureUnitComboList.SelectedIndex = 0;
+				}
+				if (MeasureUnit == "I")
+				{
+					temperatureUnitComboList.SelectedIndex = 1;
+				}
+				if (MeasureUnit == "S")
+				{
+					temperatureUnitComboList.SelectedIndex = 2;
+				}
+			} catch (Exception ex)
+			{
+				MessageBox.Show(ex.Message);
+			}
 			
 		}
 
@@ -91,9 +123,7 @@ namespace WetterApp
 		{
 			SaveSetting();
 			
-            MainWindow newWindow = new MainWindow();
-            newWindow.Show();
-            Close();
+            
         }
 
 		private void SaveSetting()
@@ -120,49 +150,21 @@ namespace WetterApp
 			if (temperatureUnitComboList.SelectedItem != null)
 			{
 				string selectedOption = ((System.Windows.Controls.ComboBoxItem)temperatureUnitComboList.SelectedItem).Tag.ToString();
-				MessageBox.Show($"Ausgewählt: {selectedOption}");
+				//MessageBox.Show($"Ausgewählt: {selectedOption}");
 				MeasureUnit = selectedOption;
                 
             }
 		}
 
-		private void windspeedCheckBox_Click(object sender, RoutedEventArgs e)
-		{
-			if(windspeedCheckBox.IsChecked == true)
-			{
-				bool selectedOption = true;
-				MessageBox.Show($"Ausgewählt: {selectedOption}");
-				Windspeed = selectedOption;
-			}
-			else
-			{
-				bool selectedOption = false;
-				MessageBox.Show($"Ausgewählt: {selectedOption}");
-				Windspeed = selectedOption;
-			}
-		}
+		
 
 		private void CloseButtonClick(object sender, RoutedEventArgs e)
 		{
+			MainWindow newWindow = new MainWindow();
+			newWindow.Show();
 			Close();
 		}
 
-		private void windspeedCheckBox_Checked(object sender, RoutedEventArgs e)
-		{
-			//windspeedCheckBox.IsChecked = true;
-
-            if (windspeedCheckBox.IsChecked == true)
-            {
-                bool selectedOption = true;
-                MessageBox.Show($"Ausgewählt: {selectedOption}");
-                Windspeed = selectedOption;
-            }
-            else
-            {
-                bool selectedOption = false;
-                MessageBox.Show($"Ausgewählt: {selectedOption}");
-                Windspeed = selectedOption;
-            }
-        }
+		
 	}
 }

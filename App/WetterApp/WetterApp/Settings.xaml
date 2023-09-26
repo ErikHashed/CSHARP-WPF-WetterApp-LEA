@@ -9,26 +9,19 @@
         AllowsTransparency="True"
         WindowStyle="None"
         Title="Settings" Height="323" Width="455" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
-
-    
-
     <Grid>
-        
-            <Label Content="Windgeschwindigkeit" Margin="310,133,22,0"/>
-
-       
-
-        <ComboBox x:Name="languageListComboBox"   HorizontalAlignment="Left" Margin="291,27,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="languageList_SelectionChanged">
+        <Label Content="Sprache" Margin="72,21,313,277"></Label>
+        <ComboBox x:Name="languageListComboBox"   HorizontalAlignment="Left" Margin="47,51,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="languageList_SelectionChanged">
             <ComboBoxItem Content="Deutsch" Tag="de"/>
             <ComboBoxItem Content="Englisch" Tag="en"/>
             <ComboBoxItem Content="mehr hier adden" Tag="sprache abkürzung hier"/>
         </ComboBox>
-        <ComboBox x:Name="temperatureUnitComboList"   HorizontalAlignment="Left" Margin="290,86,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="temperatureUnitList_SelectionChanged">
+        <ComboBox x:Name="temperatureUnitComboList"   HorizontalAlignment="Left" Margin="47,126,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="temperatureUnitList_SelectionChanged">
             <ComboBoxItem Content="Celsius (C)" Tag="M"/>
             <ComboBoxItem Content="Fahrenheit (F)" Tag="I"/>
-            <ComboBoxItem Content="Scientific (K)" Tag="S"/>
+            <ComboBoxItem Content="Kelvin (K)" Tag="S"/>
         </ComboBox>
-        <Button Name="BackButton" Content="&#8617;" FontSize="16" Click="BackButton_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="10,10,389,277" FontFamily="Segoe UI Symbol" RenderTransformOrigin="0.521,-0.705">
+        <Button Name="BackButton" Content="Apply" FontSize="16" Click="BackButton_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="375,263,24,24" FontFamily="Segoe UI Symbol" RenderTransformOrigin="0.521,-0.705">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="20" Background="{TemplateBinding Background}" Padding="5">
@@ -37,8 +30,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-
-        <CheckBox x:Name="windspeedCheckBox" Click="windspeedCheckBox_Click" Margin="290,136,139,161" Checked="windspeedCheckBox_Checked"></CheckBox>
         <!--<ToggleButton x:Name="themeToggleButton" Content="Theme wechseln" Click="ToggleTheme_Click" Margin="25,162,330,103" />-->
 
         <Button Width="30" Height="30" Content="X" FontSize="16" FontWeight="Bold" Foreground="White" Background="Red" BorderBrush="Transparent" Click="CloseButtonClick" Margin="416,10,9,283">
@@ -50,5 +41,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
+        <Label Content="Messeinheit" Margin="60,96,301,202"/>
     </Grid>
 </Window>

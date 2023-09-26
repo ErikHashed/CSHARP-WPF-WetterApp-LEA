@@ -108,9 +108,8 @@ namespace WetterApp
             inputDialog.ShowDialog();
 
             name = inputDialog.UserInput;
-            string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang=de";
-            string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={name}&key={apiKey}&lang=de";
-            //rectangleList.Items.Clear();
+            string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
+            string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={name}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
 
             try
             {
@@ -162,7 +161,7 @@ namespace WetterApp
                                 Width = 65,
                                 HorizontalAlignment = HorizontalAlignment.Center,
                                 Margin = new Thickness(0,0,0,30),
-                                Height = 30,
+                                Height = 222,
                                 IsHitTestVisible = false
                             };
 
@@ -278,8 +277,8 @@ namespace WetterApp
             for (int i = 0; i < lines.Length; i++)
             {
 
-                string url = $"https://api.weatherbit.io/v2.0/current?city={lines[i]}&key={apiKey}&{Settings.ApiLanguage}&{Settings.MeasureUnit}";
-                string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={lines[i]}&key={apiKey}&{Settings.ApiLanguage}&{Settings.MeasureUnit}";
+                string url = $"https://api.weatherbit.io/v2.0/current?city={lines[i]}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
+                string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={lines[i]}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
 
                 try
                 {
