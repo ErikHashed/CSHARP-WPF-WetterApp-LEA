@@ -58,6 +58,9 @@ namespace WetterApp
 					languageListComboBox.SelectedIndex = 3;
 
 				}
+
+				/*-----------------------------------------------*/
+
 				if (MeasureUnit == "M")
 				{
 					temperatureUnitComboList.SelectedIndex = 0;

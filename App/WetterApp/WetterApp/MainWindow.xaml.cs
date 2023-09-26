@@ -156,7 +156,6 @@ namespace WetterApp
 						{
 							Content = $"{data.data[0].temp}°",
 							FontSize = 24,
-							Width = 70,
 							Height = 222,
 							IsHitTestVisible = false,
 							HorizontalAlignment = HorizontalAlignment.Center,
@@ -339,7 +338,6 @@ namespace WetterApp
                             {
                                 Content = $"{data.data[0].temp}°",
                                 FontSize = 24,
-                                Width = 70,
                                 Height = 222,
                                 IsHitTestVisible = false,
                                 HorizontalAlignment= HorizontalAlignment.Center,
