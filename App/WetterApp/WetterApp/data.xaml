@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WetterApp"
         mc:Ignorable="d"
-        Title="daten" Height="1000" Width="427" Topmost="True" ResizeMode="NoResize" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
+        Title="daten" Height="750" Width="427" Topmost="True" ResizeMode="NoResize" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
 
     <Window.Resources>
 
@@ -37,60 +37,60 @@
         <local:WeatherForecast x:Key="ValueToMarginConverter"/>
     </Window.Resources>
 
-    <ScrollViewer VerticalScrollBarVisibility="Visible">
-        <Grid Margin="0,0,0,-487" Height="1488">
+    <!--<ScrollViewer VerticalScrollBarVisibility="Visible">-->
+    <Grid Margin="0,0,0,-487" Height="1488">
 
-            <Grid.Background>
+        <Grid.Background>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="#FF2EE1FF" Offset="0.561"/>
+                <GradientStop Color="White" Offset="1"/>
+            </LinearGradientBrush>
+        </Grid.Background>
+
+
+        <Rectangle x:Name="weatherImage" Margin="145,30,145,1338" Height="120" Width="120"/>
+        <TextBlock x:Name="txtErgebnis" HorizontalAlignment="Left" Margin="38,112,0,0" VerticalAlignment="Top" Height="76" Width="194"/>
+        <TextBlock x:Name="txtTemp" Margin="208,115,0,0" FontSize="26" HorizontalAlignment="Left" Width="256" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBlock x:Name="txtMinMax" Margin="43,503,384,-114" FontSize="16"></TextBlock>
+        <ListBox x:Name="weatherforecastList" d:ItemsSource="{d:SampleData ItemCount=5}" BorderThickness="1" Margin="0,218,0,912" HorizontalAlignment="Center" Width="336" FontSize="20" SelectionChanged="weatherforecastList_SelectionChanged" Background="#FF2EE1FF">
+            <ListBox.BorderBrush>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                    <GradientStop Color="#FF2EE1FF" Offset="0.561"/>
+                    <GradientStop Color="#FF2EE1FF" Offset="0.548"/>
                     <GradientStop Color="White" Offset="1"/>
                 </LinearGradientBrush>
-            </Grid.Background>
-
-
-            <Rectangle x:Name="weatherImage" Margin="145,30,145,1338" Height="120" Width="120"/>
-            <TextBlock x:Name="txtErgebnis" HorizontalAlignment="Left" Margin="38,112,0,0" VerticalAlignment="Top" Height="76" Width="194"/>
-            <TextBlock x:Name="txtTemp" Margin="208,115,0,0" FontSize="26" HorizontalAlignment="Left" Width="256" VerticalAlignment="Top" FontWeight="Bold"/>
-            <TextBlock x:Name="txtMinMax" Margin="43,503,384,-114" FontSize="16"></TextBlock>
-            <ListBox x:Name="weatherforecastList" d:ItemsSource="{d:SampleData ItemCount=5}" BorderThickness="1" Margin="0,218,0,912" HorizontalAlignment="Center" Width="336" FontSize="20" SelectionChanged="weatherforecastList_SelectionChanged" Background="#FF2EE1FF">
-                <ListBox.BorderBrush>
-                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                        <GradientStop Color="#FF2EE1FF" Offset="0.548"/>
-                        <GradientStop Color="White" Offset="1"/>
-                    </LinearGradientBrush>
-                </ListBox.BorderBrush>
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding Temperature}" Margin="0 0 10 0"/>
-                            <Image Source="{Binding IconPath}"  Width="60" Height="60" Margin="10 0 0 0"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
-            <Label Content="7-Tage-Vorhersage" HorizontalAlignment="Left" BorderBrush="Transparent" BorderThickness="0" Margin="28,193,0,0" VerticalAlignment="Top" Width="128" Height="25" FontSize="14"/>
-            <Label x:Name="nameLabel" Content="" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Width="120" Height="58" FontSize="24"/>
-            <Button x:Name="Close" Width="30" Height="30" Content="X" FontSize="16" FontWeight="Bold" Foreground="White" Background="Red" BorderBrush="Transparent" Click="CloseButtonClick" Margin="321,19,59,1439">
-                <Button.Template>
-                    <ControlTemplate TargetType="Button">
-                        <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Button.Template>
-            </Button>
-            <Label x:Name="Sunrise" HorizontalAlignment="Left" Margin="28,581,0,0" VerticalAlignment="Top" Height="47" Width="98"/>
-            <Image x:Name="sunIcon" DataContext="sunIcon" Margin="148,719,142,649" Width="Auto" Height="Auto"></Image>
-            <Label x:Name="Sunset" HorizontalAlignment="Left" Margin="282,581,0,0" VerticalAlignment="Top" Height="47" Width="108"/>
-
-            
+            </ListBox.BorderBrush>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Temperature}" Margin="0 0 10 0"/>
+                        <Image Source="{Binding IconPath}"  Width="60" Height="60" Margin="10 0 0 0"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+        <Label Content="7-Tage-Vorhersage" HorizontalAlignment="Left" BorderBrush="Transparent" BorderThickness="0" Margin="28,193,0,0" VerticalAlignment="Top" Width="128" Height="25" FontSize="14"/>
+        <Label x:Name="nameLabel" Content="" HorizontalAlignment="Center" Margin="0,5,0,0" VerticalAlignment="Top" Width="120" Height="58" FontSize="24"/>
+        <Button x:Name="Close" Content="X" FontSize="16" FontWeight="Bold" Foreground="White" Background="Red" BorderBrush="Transparent" Click="CloseButtonClick" Margin="336,14,37,1440">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+        <Label x:Name="Sunrise" HorizontalAlignment="Left" Margin="43,581,0,0" VerticalAlignment="Top" Height="47" Width="98" FontSize="18"/>
+        <Image x:Name="sunIcon" Margin="140,568,151,800" Width="Auto" Height="Auto"></Image>
+        <Label x:Name="Sunset" HorizontalAlignment="Left" Margin="282,581,0,0" VerticalAlignment="Top" Height="47" Width="108" FontSize="18"/>
 
 
 
-            <!-- Sonnenaufgangs- und Untergangszeiten -->
 
-            <!-- Sonnenslider -->
 
-        </Grid>
-    </ScrollViewer>
+        <!-- Sonnenaufgangs- und Untergangszeiten -->
+
+        <!-- Sonnenslider -->
+
+    </Grid>
+    <!--</ScrollViewer>-->
 </Window>

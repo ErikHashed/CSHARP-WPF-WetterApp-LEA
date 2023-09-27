@@ -35,39 +35,72 @@ namespace WetterApp
         private string citiesFilePath = $"../../files/cities.txt";
 
 
-        private const int HOTKEY_ID = 9000;
+        private const int HOTKEY_ID_W = 9000;
         private const uint MOD_CONTROL = 0x0002; // Control-Taste
+        private const uint VK_W = 0x57; // W-Taste
 
+        private const int HOTKEY_ID_L = 9001; // Neuer Hotkey für Strg + L
+        private const uint VK_L = 0x4C; // L-Taste
 
         public MainWindow()
         {
+            // ...
             InitializeComponent();
-
             LoadData();
 
             Loaded += (s, e) =>
             {
                 IntPtr handle = new WindowInteropHelper(this).Handle;
-                RegisterHotKey(handle, HOTKEY_ID, MOD_CONTROL, (uint)KeyInterop.VirtualKeyFromKey(Key.W));
+                RegisterHotKey(handle, HOTKEY_ID_W, MOD_CONTROL, VK_W);
+                RegisterHotKey(handle, HOTKEY_ID_L, MOD_CONTROL, VK_L); // Registriere neuen Hotkey für Strg + L
             };
 
             Unloaded += (s, e) =>
             {
                 IntPtr handle = new WindowInteropHelper(this).Handle;
-                UnregisterHotKey(handle, HOTKEY_ID);
+                UnregisterHotKey(handle, HOTKEY_ID_W);
+                UnregisterHotKey(handle, HOTKEY_ID_L); // Unregistriere Hotkey für Strg + L
             };
+
+            // ...
         }
 
-
-        private void HotKeyPressed()
+        private void HotKeyPressed_W()
         {
             Settings newWindow = new Settings();
             Close();
             newWindow.Show();
-
-
-
         }
+
+        private void HotKeyPressed_L()
+        {
+            InputDialog newWindow = new InputDialog();
+            Close();
+            newWindow.Show();
+        }
+
+        private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
+        {
+            const int WM_HOTKEY = 0x0312;
+            switch (msg)
+            {
+                case WM_HOTKEY:
+                    int id = wParam.ToInt32();
+                    if (id == HOTKEY_ID_W)
+                    {
+                        HotKeyPressed_W();
+                    }
+                    else if (id == HOTKEY_ID_L)
+                    {
+                        HotKeyPressed_L();
+                    }
+                    handled = true;
+                    break;
+            }
+            return IntPtr.Zero;
+        }
+
+      
 
         // Überschreiben von WndProc, um Nachrichten abzufangen
         protected override void OnSourceInitialized(EventArgs e)
@@ -78,22 +111,7 @@ namespace WetterApp
             source.AddHook(HwndHook);
         }
 
-        private IntPtr HwndHook(IntPtr hwnd, int msg, IntPtr wParam, IntPtr lParam, ref bool handled)
-        {
-            const int WM_HOTKEY = 0x0312;
-            switch (msg)
-            {
-                case WM_HOTKEY:
-                    int id = wParam.ToInt32();
-                    if (id == HOTKEY_ID)
-                    {
-                        HotKeyPressed();
-                    }
-                    handled = true;
-                    break;
-            }
-            return IntPtr.Zero;
-        }
+       
 
         [DllImport("user32.dll")]
         private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);

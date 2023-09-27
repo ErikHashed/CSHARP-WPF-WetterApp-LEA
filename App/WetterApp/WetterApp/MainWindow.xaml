@@ -68,6 +68,10 @@
             </Button.Template>
         </Button>
 
+
+        <Label x:Name="strgL" Content="STRG + L" HorizontalAlignment="Left" Margin="58,421,0,0" VerticalAlignment="Top" Width="62" FontSize="14" Height="29"/>
+        <Label x:Name="strgW" Content="STRG + W" HorizontalAlignment="Right" Margin="0,421,42,0" VerticalAlignment="Top" Width="84" FontSize="14" Height="29"/>
+
     </Grid>
 
 </Window>

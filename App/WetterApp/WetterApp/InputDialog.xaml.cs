@@ -36,5 +36,11 @@ namespace WetterApp
 
             this.Close();
         }
+        private void InputDialog_Closed(object sender, EventArgs e)
+        {
+            // Diese Methode wird aufgerufen, wenn das Fenster geschlossen wird.
+            MainWindow newWindow = new MainWindow();
+            newWindow.Show();
+        }
     }
 }
