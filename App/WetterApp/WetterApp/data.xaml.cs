@@ -18,6 +18,8 @@ using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using System.Windows.Threading;
 using Windows.Media.Protection.PlayReady;
+using System.Globalization;
+
 namespace WetterApp
 {
 
@@ -44,12 +46,34 @@ namespace WetterApp
             GetInformation(city);
 
 			WeatherAlert(city);
+
+
+
+
+
 		}
         private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
         private HttpClient client = new HttpClient();
 
+		public string ConvertDateFormat(string inputDate)
+		{
+			try
+			{
+				DateTime date = DateTime.ParseExact(inputDate, "yyyy-MM-dd:06", CultureInfo.InvariantCulture);
 
-        private async void TimeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+				// Convert the DateTime object to the desired format
+				string formattedDate = date.ToString("dd/MM");
+
+				return formattedDate;
+			}
+			catch (FormatException)
+			{
+				// Handle the case where the input date is not in the expected format
+				return "Invalid Date Format";
+			}
+		}
+
+		private async void TimeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
         {
             await UpdateSunriseSunsetTimes(e.NewValue);
         }
@@ -157,54 +181,71 @@ namespace WetterApp
 
 						List<WeatherForecast> forecasts = new List<WeatherForecast>();
 
+						DateTime dayOne = DateTime.Today;
+						int day1 = dayOne.Day;
+						int month1 = dayOne.Month;
+						DateTime dayTwo = dayOne.AddDays(1);
+						int day2 = dayTwo.Day;
+						int month2 = dayTwo.Month;
+						DateTime dayThree = dayOne.AddDays(2);
+						int day3 = dayThree.Day;
+						int month3 = dayThree.Month;
+						DateTime dayFour = dayOne.AddDays(3);
+						int day4 = dayFour.Day;
+						int month4 = dayFour.Month;
+						DateTime dayFive = dayOne.AddDays(4);
+						int day5 = dayFive.Day;
+						int month5 = dayFive.Month;
+						DateTime daySix = dayOne.AddDays(5);
+						int day6 = daySix.Day;
+						int month6 = daySix.Month;
+						DateTime daySeven = dayOne.AddDays(6);
+						int day7 = daySeven.Day;
+						int month7 = daySeven.Month;
+
 						forecasts.Add(new WeatherForecast
 						{
-							Temperature = $"{data.data[0].datetime}   {data.data[0].min_temp} / {data.data[0].max_temp}",
+							Temperature = $"{day1}/{month1}   {data.data[0].min_temp} / {data.data[0].max_temp}",
 							IconPath = $"pack://application:,,,/images/{data.data[0].weather.icon}.png"
 						});
 
 						forecasts.Add(new WeatherForecast
 						{
-							Temperature = $"{data.data[1].datetime}   {data.data[1].min_temp} / {data.data[1].max_temp}",
+							Temperature = $"{day2}/{month2}   {data.data[1].min_temp} / {data.data[1].max_temp}",
 							IconPath = $"pack://application:,,,/images/{data.data[1].weather.icon}.png"
 						});
 
 						forecasts.Add(new WeatherForecast
 						{
-							Temperature = $"{data.data[2].datetime}   {data.data[2].min_temp} / {data.data[2].max_temp}",
+							Temperature = $"{day3}/{month3}   {data.data[2].min_temp} / {data.data[2].max_temp}",
 							IconPath = $"pack://application:,,,/images/{data.data[2].weather.icon}.png"
 						});
 
 						forecasts.Add(new WeatherForecast
 						{
-							Temperature = $"{data.data[3].datetime}   {data.data[3].min_temp} / {data.data[3].max_temp}",
+							Temperature = $"{day4}/{month4}   {data.data[3].min_temp} / {data.data[3].max_temp}",
 							IconPath = $"pack://application:,,,/images/{data.data[3].weather.icon}.png"
 						});
 
 						forecasts.Add(new WeatherForecast
 						{
-							Temperature = $"{data.data[4].datetime}   {data.data[4].min_temp} / {data.data[4].max_temp}",
+							Temperature = $"{day5}/{month5}   {data.data[4].min_temp} / {data.data[4].max_temp}",
 							IconPath = $"pack://application:,,,/images/{data.data[4].weather.icon}.png"
 						});
 
                         forecasts.Add(new WeatherForecast
                         {
-                            Temperature = $"{data.data[5].datetime}   {data.data[5].min_temp} / {data.data[5].max_temp}",
+                            Temperature = $"{day6}/{month6}   {data.data[5].min_temp} / {data.data[5].max_temp}",
                             IconPath = $"pack://application:,,,/images/{data.data[5].weather.icon}.png"
                         });
 
                         forecasts.Add(new WeatherForecast
                         {
-                            Temperature = $"{data.data[6].datetime}   {data.data[6].min_temp} / {data.data[6].max_temp}",
+                            Temperature = $"{day7}/{month7}   {data.data[6].min_temp} / {data.data[6].max_temp}",
                             IconPath = $"pack://application:,,,/images/{data.data[6].weather.icon}.png"
                         });
 
-                        forecasts.Add(new WeatherForecast
-                        {
-                            Temperature = $"{data.data[7].datetime}   {data.data[7].min_temp} / {data.data[7].max_temp}",
-                            IconPath = $"pack://application:,,,/images/{data.data[7].weather.icon}.png"
-                        });
-
+                        
                         weatherforecastList.ItemsSource = forecasts;
 
 						try
@@ -214,12 +255,16 @@ namespace WetterApp
 								ImageBrush img3 = new ImageBrush();
 								ImageBrush img4 = new ImageBrush();
 								ImageBrush img5 = new ImageBrush();
+								ImageBrush img6 = new ImageBrush();
+								ImageBrush img7 = new ImageBrush();
 
 								img1.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png"));
 								img2.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[1].weather.icon}.png"));
 								img3.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[2].weather.icon}.png"));
 								img4.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[3].weather.icon}.png"));
 								img5.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[4].weather.icon}.png"));
+								img6.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[5].weather.icon}.png"));
+								img7.ImageSource = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[6].weather.icon}.png"));
 
 						}
 						catch (Exception ex)
