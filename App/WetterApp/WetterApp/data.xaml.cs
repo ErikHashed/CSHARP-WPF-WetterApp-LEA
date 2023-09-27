@@ -34,45 +34,20 @@ namespace WetterApp
 	{
 		string city = null;
         
-    public string ApiLanguage { get; set; }
         public data(string cityName)
 		{
 			InitializeComponent();
 
 			city = cityName;
 
-            
-
             GetInformation(city);
 
 			WeatherAlert(city);
 
-
-
-
-
+			LoadIcon();
 		}
         private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
         private HttpClient client = new HttpClient();
-
-		public string ConvertDateFormat(string inputDate)
-		{
-			try
-			{
-				DateTime date = DateTime.ParseExact(inputDate, "yyyy-MM-dd:06", CultureInfo.InvariantCulture);
-
-				// Convert the DateTime object to the desired format
-				string formattedDate = date.ToString("dd/MM");
-
-				return formattedDate;
-			}
-			catch (FormatException)
-			{
-				// Handle the case where the input date is not in the expected format
-				return "Invalid Date Format";
-			}
-		}
-
        
         private async void GetInformation(string city)
 		{
@@ -229,7 +204,7 @@ namespace WetterApp
 
 		async void WeatherAlert(string city)
 		{
-			string weatherAlertApi = $"https://api.weatherbit.io/v2.0/alerts?city={city}&key={apiKey}";
+			string weatherAlertApi = $"https://api.weatherbit.io/v2.0/alerts?city={city}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
 			try
 			{
 				using (HttpClient client = new HttpClient())
@@ -241,7 +216,7 @@ namespace WetterApp
 						string json = await response.Content.ReadAsStringAsync();
 						dynamic data = JObject.Parse(json);
 
-						if(data.alerts != null)
+						if (data.alerts != null)
 						{
 							string alerts = data.alerts[0].description;
 							new ToastContentBuilder()
@@ -251,20 +226,58 @@ namespace WetterApp
 							.AddText(alerts)
 							.Show();
 						}
-						
+
 					}
 				}
 			}
+			catch (Exception)
+			{ }
+		}
+
+		void LoadIcon()
+		{
+			try
+			{
+				BitmapImage source;
+				if (DateTime.Now.Hour >= 6 && DateTime.Now.Hour <= 8)
+				{
+					source = new BitmapImage(new Uri("pack://application:,,,/images/sunrise.png"));
+				}
+				else if(DateTime.Now.Hour > 8 && DateTime.Now.Hour <= 18)
+				{
+					source = new BitmapImage(new Uri("pack://application:,,,/images/normalSun.png"));
+				}
+				else
+				{
+					source = new BitmapImage(new Uri("pack://application:,,,/images/sunset.png"));
+				}
+				sunIcon.Source = source;
+
+
+				//DateTime time = DateTime.Now;
+				//int currentHour = time.Hour;
+
+				//if (currentHour >= 6 && currentHour <= 8)
+				//{
+				//	sunIcon.Source = sunrise;
+				//}
+				//else if (currentHour > 8 && currentHour <= 18)
+				//{
+				//	sunIcon.Source = normalSun;
+				//}
+				//else if (currentHour >= 19 && currentHour <= 24)
+				//{
+				//	sunIcon.Source = sunset;
+				//}
+			}
 			catch (Exception ex)
 			{
-				//MessageBox.Show(ex.Message);
+				MessageBox.Show(ex.Message);
 			}
 		}
 
 
-		
-
-        private void CloseButtonClick(object sender, RoutedEventArgs e)
+		private void CloseButtonClick(object sender, RoutedEventArgs e)
 		{
 			Close();
 		}

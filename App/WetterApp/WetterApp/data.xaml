@@ -80,6 +80,7 @@
                 </Button.Template>
             </Button>
             <Label x:Name="Sunrise" HorizontalAlignment="Left" Margin="28,581,0,0" VerticalAlignment="Top" Height="47" Width="98"/>
+            <Image x:Name="sunIcon" DataContext="sunIcon" Margin="148,719,142,649" Width="Auto" Height="Auto"></Image>
             <Label x:Name="Sunset" HorizontalAlignment="Left" Margin="282,581,0,0" VerticalAlignment="Top" Height="47" Width="108"/>
 
             
