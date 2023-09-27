@@ -38,9 +38,7 @@ namespace WetterApp
 		{
 			InitializeComponent();
            
-        
-
-        GetInformation(city);
+			GetInformation(city);
 
 			WeatherAlert(city);
 		}
