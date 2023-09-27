@@ -17,8 +17,7 @@ using Microsoft.Toolkit.Uwp.Notifications;
 using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using System.Windows.Threading;
-
-
+using Windows.Media.Protection.PlayReady;
 namespace WetterApp
 {
 
@@ -31,21 +30,82 @@ namespace WetterApp
 
 	public partial class data : Window
 	{
-       
+		string city = null;
         
     public string ApiLanguage { get; set; }
-        public data(string city)
+        public data(string cityName)
 		{
 			InitializeComponent();
-           
-			GetInformation(city);
+
+			city = cityName;
+
+            timeSlider.ValueChanged += TimeSlider_ValueChanged;
+
+            GetInformation(city);
 
 			WeatherAlert(city);
 		}
         private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
+        private HttpClient client = new HttpClient();
 
 
-		private async void GetInformation(string city)
+        private async void TimeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            await UpdateSunriseSunsetTimes(e.NewValue);
+        }
+
+        private void timeSlider_Loaded(object sender, RoutedEventArgs e)
+        {
+            // Berechne die Position des weißen Punktes basierend auf der aktuellen Uhrzeit
+            double currentValue = timeSlider.Value;
+            double position = (currentValue / 24) * 300; // 300 ist die Breite des Sliders
+
+            // Erstelle den weißen Punkt
+            Ellipse whiteDot = new Ellipse();
+            whiteDot.Width = 10;
+            whiteDot.Height = 10;
+            whiteDot.Fill = Brushes.White;
+
+            // Setze die Position des weißen Punktes
+            whiteDot.Margin = new Thickness(position, 0, 0, 0);
+
+            // Füge den weißen Punkt zum Grid hinzu (das den Slider enthält)
+            Grid grid = timeSlider.Template.FindName("PART_Track", timeSlider) as Grid;
+            if (grid != null)
+            {
+                grid.Children.Add(whiteDot);
+            }
+        }
+        private async Task UpdateSunriseSunsetTimes(double sliderValue)
+        {
+            try
+            {
+
+                string apiUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={city}&key={apiKey}";
+                HttpResponseMessage response = await client.GetAsync(apiUrl);
+
+                response.EnsureSuccessStatusCode();
+
+                string responseBody = await response.Content.ReadAsStringAsync();
+                JObject json = JObject.Parse(responseBody);
+
+                // Hole die Sonnenaufgangs- und Sonnenuntergangszeiten aus der API
+                DateTime sunrise = json["data"][0]["sunrise"].ToObject<DateTime>();
+                DateTime sunset = json["data"][0]["sunset"].ToObject<DateTime>();
+
+                // Berechne die gewünschte Zeit basierend auf dem Slider-Wert
+                DateTime selectedTime = sunrise.AddHours(sliderValue);
+
+                // Aktualisiere die Anzeige
+                sunriseText.Content = $"Sonnenaufgang: {sunrise.ToString("HH:mm tt")}";
+                sunsetText.Content = $"Sonnenuntergang: {sunset.ToString("HH:mm tt")}";
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Fehler beim Abrufen der Daten: " + ex.Message);
+            }
+        }
+        private async void GetInformation(string city)
 		{
 
 			string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang={Settings.ApiLanguage}&{Settings.MeasureUnit}";
@@ -209,9 +269,10 @@ namespace WetterApp
 			}
 		}
 
+
 		
 
-		private void CloseButtonClick(object sender, RoutedEventArgs e)
+        private void CloseButtonClick(object sender, RoutedEventArgs e)
 		{
 			Close();
 		}
@@ -221,7 +282,23 @@ namespace WetterApp
 
 		}
 	}
+    //public class ValueToMarginConverter : IValueConverter
+    //{
+    //    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        if (value is double sliderValue)
+    //        {
+    //            double position = (sliderValue / 24) * 300; // 300 ist die Breite des Sliders
+    //            return new Thickness(position, 0, 0, 0);
+    //        }
+    //        return new Thickness(0);
+    //    }
 
-	
+    //    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+    //    {
+    //        throw new NotImplementedException();
+    //    }
+    //}
+
 }
 			
