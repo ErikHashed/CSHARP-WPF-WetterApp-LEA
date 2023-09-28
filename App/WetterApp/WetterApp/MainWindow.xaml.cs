@@ -117,150 +117,22 @@ namespace WetterApp
         private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk); 
 
         [DllImport("user32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id); 
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
 
 
-        public async void openAddWindow(object sender, RoutedEventArgs e)//selbst gemacht
-        {
-            InputDialog inputDialog = new InputDialog();
-            inputDialog.ShowDialog();
-            
+		public void openAddWindow(object sender, RoutedEventArgs e)//selbst gemacht
+		{
 
-            name = inputDialog.UserInput;
-            string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
-            string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={name}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
-
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.GetAsync(apiUrl);
-
-                    HttpResponseMessage responseForecast = await client.GetAsync(forecastUrl);
-
-					if (response.IsSuccessStatusCode)
-					{
-						string json = await response.Content.ReadAsStringAsync();
-						string forecastJson = await responseForecast.Content.ReadAsStringAsync();
-						dynamic data = JObject.Parse(json);
-						dynamic forecastData = JObject.Parse(forecastJson);
-
-						Rectangle newRectangle = new Rectangle
-						{
-							Width = 200,
-							Height = 340,
-							Fill = Brushes.LightBlue,
-							HorizontalAlignment = HorizontalAlignment.Right,
-
-							Name = name,
-						};
-
-						Image weatherIcon = new Image
-						{
-							Source = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png")),
-							Width = 120,
-							Height = 120,
-						};
-
-						Label nameLabel = new Label
-						{
-							Content = name,
-							HorizontalAlignment = HorizontalAlignment.Center,
-							VerticalAlignment = VerticalAlignment.Top, // Oben ausrichten
-							FontSize = 20,
-							IsHitTestVisible = false
-						};
-
-						Label temperature = new Label
-						{
-							Content = $"{data.data[0].temp}°",
-							FontSize = 24,
-							Height = 222,
-							IsHitTestVisible = false,
-							HorizontalAlignment = HorizontalAlignment.Center,
-							VerticalAlignment = VerticalAlignment.Top,
-							Margin = new Thickness(0, 34, 0, 0),
-
-
-						};
-
-						Label description = new Label
-						{
-							Content = $"{data.data[0].weather.description} {forecastData.data[0].min_temp}° / {forecastData.data[0].max_temp}°",
-							//Width = 100,
-							Height = 172,
-							IsHitTestVisible = false,
-							HorizontalAlignment = HorizontalAlignment.Center,
-
-						};
-
-						Button removeButton = new Button
-						{
-							Width = 70,
-							Height = 40,
-							Tag = newRectangle.Name,
-							Background = Brushes.LightBlue,
-							Margin = new Thickness(0, 186, 0, 20),
-							BorderBrush = Brushes.Black,
-							VerticalAlignment = VerticalAlignment.Bottom,
-						};
-
-
-						if (Settings.ApiLanguage == "de")
-						{
-							removeButton.Content = "Entfernen";
-						}
-						if (Settings.ApiLanguage == "en")
-						{
-							removeButton.Content = "Remove";
-						}
-						if (Settings.ApiLanguage == "fr")
-						{
-							removeButton.Content = "Retirer";
-						}
-						if (Settings.ApiLanguage == "es")
-						{
-							removeButton.Content = "Eliminar";
-						}
+			InputDialog inputDialog = new InputDialog();
+			Close();
+			inputDialog.Show(); 
 
 
 
-						removeButton.Click += removeButton_Click;
-
-						Grid grid = new Grid();
-						grid.Children.Add(newRectangle);
-						grid.Children.Add(nameLabel);
-						grid.Children.Add(weatherIcon);
-						grid.Children.Add(temperature);
-						grid.Children.Add(description);
-						grid.Children.Add(removeButton);
-
-						StackPanel stackPanel = new StackPanel
-						{
-							Orientation = Orientation.Vertical
-
-						};
-
-						stackPanel.Children.Add(grid);
-
-						// Add the stackPanel to your UI container once
-						rectangleList.Items.Add(stackPanel);
-
-						// Attach the event handler to the newRectangle
-						newRectangle.MouseDown += Rectangle_Click;
-					}
-                    
-                }
-
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
+		}
 
 
-        void Rectangle_Click(object sender, RoutedEventArgs e)//selbst gemacht
+		void Rectangle_Click(object sender, RoutedEventArgs e)//selbst gemacht
         {
             Rectangle clickedRectangle = (Rectangle)sender;
             //Label nameLabel = ((Grid)clickedRectangle.Parent).Children[1] as Label;

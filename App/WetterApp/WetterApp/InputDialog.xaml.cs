@@ -45,11 +45,13 @@ namespace WetterApp
 
             File.AppendAllText(citiesFilePath, UserInput + "\n");
 
-
-
             MainWindow newWindow = new MainWindow();
             newWindow.Show();
+
+
             Close();
+
+
 
         }
 

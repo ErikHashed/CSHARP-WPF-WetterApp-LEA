@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "\\\\00E04C68006F\\Users\\bib\\OneDrive - bib & FHDW\\Dokumente\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\WetterApp.csproj": {}
+    "C:\\Users\\bib\\Documents\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\WetterApp.csproj": {}
   },
   "projects": {
-    "\\\\00E04C68006F\\Users\\bib\\OneDrive - bib & FHDW\\Dokumente\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\WetterApp.csproj": {
+    "C:\\Users\\bib\\Documents\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\WetterApp.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "\\\\00E04C68006F\\Users\\bib\\OneDrive - bib & FHDW\\Dokumente\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\WetterApp.csproj",
+        "projectUniqueName": "C:\\Users\\bib\\Documents\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\WetterApp.csproj",
         "projectName": "WetterApp",
-        "projectPath": "\\\\00E04C68006F\\Users\\bib\\OneDrive - bib & FHDW\\Dokumente\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\WetterApp.csproj",
+        "projectPath": "C:\\Users\\bib\\Documents\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\WetterApp.csproj",
         "packagesPath": "C:\\Users\\bib\\.nuget\\packages\\",
-        "outputPath": "\\\\00E04C68006F\\Users\\bib\\OneDrive - bib & FHDW\\Dokumente\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\obj\\",
+        "outputPath": "C:\\Users\\bib\\Documents\\GitHub\\WetterApp-LEA\\App\\WetterApp\\WetterApp\\obj\\",
         "projectStyle": "PackageReference",
         "skipContentFileWrite": true,
         "configFilePaths": [
