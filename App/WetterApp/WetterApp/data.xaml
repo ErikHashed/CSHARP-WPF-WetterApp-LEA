@@ -79,9 +79,9 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <Label x:Name="Sunrise" HorizontalAlignment="Left" Margin="43,581,0,0" VerticalAlignment="Top" Height="47" Width="98" FontSize="18"/>
-        <Image x:Name="sunIcon" Margin="140,568,151,800" Width="Auto" Height="Auto"></Image>
-        <Label x:Name="Sunset" HorizontalAlignment="Left" Margin="282,581,0,0" VerticalAlignment="Top" Height="47" Width="108" FontSize="18"/>
+        <Label x:Name="Sunrise" HorizontalAlignment="Left" Margin="80,581,0,0" VerticalAlignment="Top" Height="47" Width="98" FontSize="18"/>
+        <Image x:Name="sunIcon" Margin="142,579,153,811" Width="Auto" Height="Auto"></Image>
+        <Label x:Name="Sunset" HorizontalAlignment="Left" Margin="274,581,0,0" VerticalAlignment="Top" Height="47" Width="108" FontSize="18"/>
 
 
 

@@ -32,7 +32,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <!--<ToggleButton x:Name="themeToggleButton" Content="Theme wechseln" Click="ToggleTheme_Click" Margin="25,162,330,103" />-->
 
         <Button Width="30" Height="30" Content="X" FontSize="16" FontWeight="Bold" Foreground="White" Background="Red" BorderBrush="Transparent" Click="CloseButtonClick" Margin="416,10,9,283">
             <Button.Template>

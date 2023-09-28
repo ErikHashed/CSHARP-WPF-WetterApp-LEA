@@ -47,7 +47,7 @@
             </Button.Template>
         </Button>
 
-        <!--<Button Content="Hinzufügen" HorizontalAlignment="Left" Margin="51,362,0,0" VerticalAlignment="Top" Click="openAddWindow" Height="46"/>-->
+       
         <Button Name="Hinzufügen" Content="+" FontSize="24" Click="openAddWindow" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="36,384,666,23" FontFamily="Segoe UI Symbol" RenderTransformOrigin="0.521,-0.705">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
@@ -57,7 +57,6 @@
                 </ControlTemplate>
             </Button.Template>
         </Button>
-        <!--<Button x:Name="settingsButton" Content="Settings" Margin="665,362,35,42" Click="settingsButton_Click"/>-->
         <Button Width="30" Height="30" Content="X" FontSize="16" FontWeight="Bold" Foreground="White" Background="Red" BorderBrush="Transparent" Click="CloseButtonClick" Margin="778,0,0,420">
             <Button.Template>
                 <ControlTemplate TargetType="Button">

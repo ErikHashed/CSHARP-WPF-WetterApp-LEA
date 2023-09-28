@@ -43,7 +43,7 @@ namespace WetterApp
 
             UserInput = inputTextBox.Text;
 
-            File.AppendAllText(citiesFilePath, UserInput + "\n");
+            File.AppendAllText(citiesFilePath, UserInput );
 
             MainWindow newWindow = new MainWindow();
             newWindow.Show();

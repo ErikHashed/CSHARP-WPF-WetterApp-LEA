@@ -85,7 +85,7 @@ namespace WetterApp
 			if (languageListComboBox.SelectedItem != null)
 			{
 				string selectedOption = ((System.Windows.Controls.ComboBoxItem)languageListComboBox.SelectedItem).Tag.ToString();
-				//MessageBox.Show($"Ausgewählt: {selectedOption}");
+				
 				ApiLanguage = selectedOption;
                 
             }
@@ -125,7 +125,7 @@ namespace WetterApp
 			if (temperatureUnitComboList.SelectedItem != null)
 			{
 				string selectedOption = ((System.Windows.Controls.ComboBoxItem)temperatureUnitComboList.SelectedItem).Tag.ToString();
-				//MessageBox.Show($"Ausgewählt: {selectedOption}");
+				
 				MeasureUnit = selectedOption;
                 
             }

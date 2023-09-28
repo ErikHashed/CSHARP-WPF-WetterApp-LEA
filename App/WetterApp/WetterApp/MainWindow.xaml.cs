@@ -23,6 +23,7 @@ using System.Windows.Interop;
 using System.Runtime.InteropServices;
 using System.Security.Policy;
 using System.Linq;
+using static System.Net.WebRequestMethods.File;
 
 namespace WetterApp
 {
@@ -127,6 +128,7 @@ namespace WetterApp
 			Close();
 			inputDialog.Show(); 
 
+            
 
 
 		}
@@ -135,7 +137,7 @@ namespace WetterApp
 		void Rectangle_Click(object sender, RoutedEventArgs e)//selbst gemacht
         {
             Rectangle clickedRectangle = (Rectangle)sender;
-            //Label nameLabel = ((Grid)clickedRectangle.Parent).Children[1] as Label;
+           
 
             data window = new data(clickedRectangle.Name);
             window.Show();
@@ -179,136 +181,151 @@ namespace WetterApp
             string[] lines = File.ReadAllLines(citiesFilePath);
 
 
+           
+
             for (int i = 0; i < lines.Length; i++)
             {
 
-                string url = $"https://api.weatherbit.io/v2.0/current?city={lines[i]}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
-                string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={lines[i]}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
+                bool cityExists = await CityExistsInAPI(lines[i]);
 
-                try
+                if (cityExists)
                 {
-                    using (HttpClient client = new HttpClient())
+                    string url = $"https://api.weatherbit.io/v2.0/current?city={lines[i]}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
+                    string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={lines[i]}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
+
+                    try
                     {
-                        HttpResponseMessage response = await client.GetAsync(url);
-                        HttpResponseMessage forecastResponse = await client.GetAsync(forecastUrl);
-
-                        if (response.IsSuccessStatusCode)
+                        using (HttpClient client = new HttpClient())
                         {
-                            string json = await response.Content.ReadAsStringAsync();
-                            string forecastJson = await forecastResponse.Content.ReadAsStringAsync();
-                            dynamic data = JObject.Parse(json);
-                            dynamic forecastData = JObject.Parse(forecastJson);
+                            HttpResponseMessage response = await client.GetAsync(url);
+                            HttpResponseMessage forecastResponse = await client.GetAsync(forecastUrl);
 
-                            Rectangle newRectangle = new Rectangle
+                            if (response.IsSuccessStatusCode)
                             {
-                                Width = 200,
-                                Height = 340,
-                                Fill = Brushes.LightBlue,
-                                HorizontalAlignment = HorizontalAlignment.Right,
-                                
-                                Name = lines[i],
-                            };
-
-                            Image weatherIcon = new Image
-                            {
-                                Source = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png")),
-                                Width = 120,
-                                Height = 120,
-                            };
-
-                            Label nameLabel = new Label
-                            {
-                                Content = lines[i],
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                VerticalAlignment = VerticalAlignment.Top, // Oben ausrichten
-                                FontSize = 20,
-                                IsHitTestVisible = false
-                            };
-
-                            Label temperature = new Label
-                            {
-                                Content = $"{data.data[0].temp}°",
-                                FontSize = 24,
-                                Height = 222,
-                                IsHitTestVisible = false,
-                                HorizontalAlignment= HorizontalAlignment.Center,
-                                VerticalAlignment= VerticalAlignment.Top,
-                                Margin = new Thickness(0,34,0,0),
-                                
-                                
-                            };
-
-                            Label description = new Label
-                            {
-                                Content = $"{data.data[0].weather.description} {forecastData.data[0].min_temp}° / {forecastData.data[0].max_temp}°",
-                                //Width = 100,
-                                Height = 172,
-                                IsHitTestVisible = false,
-                                HorizontalAlignment = HorizontalAlignment.Center,
-                                
-                            };
-
-                            Button removeButton = new Button
-                            {
-                                Width = 70,
-                                Height = 40,
-                                Tag = newRectangle.Name,
-                                Background = Brushes.LightBlue,
-                                Margin = new Thickness(0,186,0,20),
-                                BorderBrush = Brushes.Black,
-                                VerticalAlignment= VerticalAlignment.Bottom,
-                            };
+                                string json = await response.Content.ReadAsStringAsync();
+                                string forecastJson = await forecastResponse.Content.ReadAsStringAsync();
+                                dynamic data = JObject.Parse(json);
+                                dynamic forecastData = JObject.Parse(forecastJson);
 
 
-							if (Settings.ApiLanguage == "de")
-							{
-								removeButton.Content = "Entfernen";
-							}
-							if (Settings.ApiLanguage == "en")
-							{
-								removeButton.Content = "Remove";
-							}
-							if (Settings.ApiLanguage == "fr")
-							{
-								removeButton.Content = "Retirer";
-							}
-							if (Settings.ApiLanguage == "es")
-							{
-								removeButton.Content = "Eliminar";
-							}
+                                Rectangle newRectangle = new Rectangle
+                                {
+                                    Width = 200,
+                                    Height = 340,
+                                    Fill = Brushes.LightBlue,
+                                    HorizontalAlignment = HorizontalAlignment.Right,
+
+                                    Name = lines[i],
+                                };
+
+                                Image weatherIcon = new Image
+                                {
+                                    Source = new BitmapImage(new Uri($"pack://application:,,,/images/{data.data[0].weather.icon}.png")),
+                                    Width = 120,
+                                    Height = 120,
+                                };
+
+                                Label nameLabel = new Label
+                                {
+                                    Content = lines[i],
+                                    HorizontalAlignment = HorizontalAlignment.Center,
+                                    VerticalAlignment = VerticalAlignment.Top, // Oben ausrichten
+                                    FontSize = 20,
+                                    IsHitTestVisible = false
+                                };
+
+                                Label temperature = new Label
+                                {
+                                    Content = $"{data.data[0].temp}°",
+                                    FontSize = 24,
+                                    Height = 222,
+                                    IsHitTestVisible = false,
+                                    HorizontalAlignment = HorizontalAlignment.Center,
+                                    VerticalAlignment = VerticalAlignment.Top,
+                                    Margin = new Thickness(0, 34, 0, 0),
+
+
+                                };
+
+                                Label description = new Label
+                                {
+                                    Content = $"{data.data[0].weather.description} {forecastData.data[0].min_temp}° / {forecastData.data[0].max_temp}°",
+                                    //Width = 100,
+                                    Height = 172,
+                                    IsHitTestVisible = false,
+                                    HorizontalAlignment = HorizontalAlignment.Center,
+
+                                };
+
+                                Button removeButton = new Button
+                                {
+                                    Width = 70,
+                                    Height = 40,
+                                    Tag = newRectangle.Name,
+                                    Background = Brushes.LightBlue,
+                                    Margin = new Thickness(0, 186, 0, 20),
+                                    BorderBrush = Brushes.Black,
+                                    VerticalAlignment = VerticalAlignment.Bottom,
+                                };
+
+
+                                if (Settings.ApiLanguage == "de")
+                                {
+                                    removeButton.Content = "Entfernen";
+                                }
+                                if (Settings.ApiLanguage == "en")
+                                {
+                                    removeButton.Content = "Remove";
+                                }
+                                if (Settings.ApiLanguage == "fr")
+                                {
+                                    removeButton.Content = "Retirer";
+                                }
+                                if (Settings.ApiLanguage == "es")
+                                {
+                                    removeButton.Content = "Eliminar";
+                                }
 
 
 
-							removeButton.Click += removeButton_Click;
+                                removeButton.Click += removeButton_Click;
 
-                            Grid grid = new Grid();
-                            grid.Children.Add(newRectangle);
-                            grid.Children.Add(nameLabel);
-                            grid.Children.Add(weatherIcon);
-                            grid.Children.Add(temperature);
-                            grid.Children.Add(description);
-                            grid.Children.Add(removeButton);
+                                Grid grid = new Grid();
+                                grid.Children.Add(newRectangle);
+                                grid.Children.Add(nameLabel);
+                                grid.Children.Add(weatherIcon);
+                                grid.Children.Add(temperature);
+                                grid.Children.Add(description);
+                                grid.Children.Add(removeButton);
 
-                            StackPanel stackPanel = new StackPanel
-                            {
-                                Orientation = Orientation.Vertical
-                                
-                            };
+                                StackPanel stackPanel = new StackPanel
+                                {
+                                    Orientation = Orientation.Vertical
 
-                            stackPanel.Children.Add(grid);
+                                };
 
-                            // Add the stackPanel to your UI container once
-                            rectangleList.Items.Add(stackPanel);
+                                stackPanel.Children.Add(grid);
 
-                            // Attach the event handler to the newRectangle
-                            newRectangle.MouseDown += Rectangle_Click;
+                                // Add the stackPanel to your UI container once
+                                rectangleList.Items.Add(stackPanel);
+
+                                // Attach the event handler to the newRectangle
+                                newRectangle.MouseDown += Rectangle_Click;
+                            }
                         }
+
                     }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+               
+
+               
+                
+               
             }
         }           
 
@@ -343,9 +360,9 @@ namespace WetterApp
 			{
 				lines.RemoveAt(indexToRemove);
 
-				// Write the updated lines back to the file
+				
 				File.WriteAllLines(citiesFilePath, lines);
-				MessageBox.Show("Line containing the target string removed successfully.");
+				
 			}
             LoadData();
 		}
@@ -355,6 +372,25 @@ namespace WetterApp
             Close();
         }
 
-        
+        async Task<bool> CityExistsInAPI(string cityName)
+        {
+            string url = $"https://api.weatherbit.io/v2.0/current?city={cityName}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
+
+            try
+            {
+                using (HttpClient client = new HttpClient())
+                {
+                    HttpResponseMessage response = await client.GetAsync(url);
+
+                    return response.IsSuccessStatusCode;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+            }
+        }
+
     }
 }
