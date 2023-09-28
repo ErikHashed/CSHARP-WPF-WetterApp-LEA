@@ -13,6 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Microsoft.Toolkit.Uwp.Notifications;
+using System.Net.Http;
+
+
 
 
 namespace WetterApp
@@ -29,24 +32,34 @@ namespace WetterApp
             InitializeComponent();
         }
 
+
+
+
+
+
+
         private void okClick(object sender, RoutedEventArgs e)
         {
+
             UserInput = inputTextBox.Text;
+
             File.AppendAllText(citiesFilePath, UserInput + "\n");
 
+
+
             MainWindow newWindow = new MainWindow();
-               newWindow.Show();
-            this.Close();
+            newWindow.Show();
+            Close();
 
         }
 
-        
+
 
         private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
             MainWindow newWindow = new MainWindow();
             newWindow.Show();
-            this.Close();
+            Close();
         }
     }
 }

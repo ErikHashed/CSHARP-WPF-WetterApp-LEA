@@ -124,6 +124,7 @@ namespace WetterApp
         {
             InputDialog inputDialog = new InputDialog();
             inputDialog.ShowDialog();
+            
 
             name = inputDialog.UserInput;
             string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={name}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
@@ -248,8 +249,8 @@ namespace WetterApp
 						// Attach the event handler to the newRectangle
 						newRectangle.MouseDown += Rectangle_Click;
 					}
-
-				}
+                    
+                }
 
             }
             catch (Exception ex)
