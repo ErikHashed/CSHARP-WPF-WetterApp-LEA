@@ -34,13 +34,19 @@ namespace WetterApp
             UserInput = inputTextBox.Text;
             File.AppendAllText(citiesFilePath, UserInput + "\n");
 
+            MainWindow newWindow = new MainWindow();
+               newWindow.Show();
             this.Close();
+
         }
-        private void InputDialog_Closed(object sender, EventArgs e)
+
+        
+
+        private void CloseButtonClick(object sender, RoutedEventArgs e)
         {
-            // Diese Methode wird aufgerufen, wenn das Fenster geschlossen wird.
             MainWindow newWindow = new MainWindow();
             newWindow.Show();
+            this.Close();
         }
     }
 }

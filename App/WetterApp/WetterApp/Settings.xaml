@@ -8,7 +8,7 @@
         Background="LightBlue"
         AllowsTransparency="True"
         WindowStyle="None"
-        Title="Settings" Height="323" Width="455" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
+        Title="W Wetter" Height="323" Width="455" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
     <Grid>
         <Label x:Name="languageLabel" Margin="47,18,288,277" FontSize="14"></Label>
         <ComboBox x:Name="languageListComboBox"   HorizontalAlignment="Left" Margin="47,51,0,0" VerticalAlignment="Top" Width="120" SelectionChanged="languageList_SelectionChanged" Height="26">
@@ -23,7 +23,7 @@
             <ComboBoxItem Content="Fahrenheit (F)" Tag="I"/>
             <ComboBoxItem Content="Kelvin (K)" Tag="S"/>
         </ComboBox>
-        <Button Name="BackButton" Content="Apply" FontSize="16" Click="BackButton_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="340,265,24,18" FontFamily="Times New Roman" RenderTransformOrigin="0.521,-0.705">
+        <Button Name="ApplyButton" Content="Apply" FontSize="16" Click="BackButton_Click" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="340,265,24,18" FontFamily="Times New Roman" RenderTransformOrigin="0.521,-0.705">
             <Button.Template>
                 <ControlTemplate TargetType="Button">
                     <Border CornerRadius="20" Background="{TemplateBinding Background}" Padding="5">

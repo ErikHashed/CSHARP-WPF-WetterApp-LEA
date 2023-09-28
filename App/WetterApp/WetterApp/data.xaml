@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WetterApp"
         mc:Ignorable="d"
-        Title="daten" Height="750" Width="427" Topmost="True" ResizeMode="NoResize" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
+        Title="W Wetter" Height="750" Width="427" Topmost="True" ResizeMode="NoResize" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
 
     <Window.Resources>
 

@@ -49,7 +49,7 @@ namespace WetterApp
         private const string apiKey = "79270c12757b499a9d0e1ecfad188c3a";
         private HttpClient client = new HttpClient();
        
-        private async void GetInformation(string city)
+        private async void GetInformation(string city)//selbst gemacht
 		{
 
 			string apiUrl = $"https://api.weatherbit.io/v2.0/current?city={city}&key={apiKey}&lang={Settings.ApiLanguage}&{Settings.MeasureUnit}";
@@ -202,7 +202,7 @@ namespace WetterApp
 			}
 		}
 
-		async void WeatherAlert(string city)
+		async void WeatherAlert(string city) //selbst gemacht
 		{
 			string weatherAlertApi = $"https://api.weatherbit.io/v2.0/alerts?city={city}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
 			try
@@ -234,7 +234,7 @@ namespace WetterApp
 			{ }
 		}
 
-		void LoadIcon()
+		void LoadIcon()//selbst gemacht
 		{
 			try
 			{
@@ -277,7 +277,7 @@ namespace WetterApp
 		}
 
 
-		private void CloseButtonClick(object sender, RoutedEventArgs e)
+		private void CloseButtonClick(object sender, RoutedEventArgs e) //selbst gemacht
 		{
 			Close();
 		}

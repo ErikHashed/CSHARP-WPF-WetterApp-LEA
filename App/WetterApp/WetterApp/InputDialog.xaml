@@ -5,13 +5,41 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WetterApp"
         mc:Ignorable="d"
-        Title="InputDialog" Height="165" Width="200"
+          Background="LightBlue"
+        AllowsTransparency="True"
+        WindowStyle="None"
+        Title="W Wetter" Height="165" Width="200"
         ResizeMode="NoResize" Topmost="True" Icon="/ced73fd957c14de6b1bd1807e36a7439.png">
     <Grid>
-        <TextBox IsTabStop="False" x:Name="inputTextBox" Margin="10,10,10,67"/>
-        <Button Content="OK" HorizontalAlignment="Center" Margin="0,104,0,0" VerticalAlignment="Top" RenderTransformOrigin="2.329,0.472" Click="okClick">
-            
+        <TextBox IsTabStop="False" x:Name="inputTextBox" Margin="10,35,10,42"/>
+
+        <Button Width="30" Height="30" Content="X" FontSize="16" FontWeight="Bold" Foreground="White" Background="Red" BorderBrush="Transparent" Click="CloseButtonClick" Margin="170,0,0,135">
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="15" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
         </Button>
-                
+
+        <Button Name="BackButton" Content="Ok" FontSize="16" Click="okClick" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="0" Background="#FF007ACC" Foreground="White" BorderBrush="{x:Null}" Margin="68,129,68,10" FontFamily="Times New Roman" RenderTransformOrigin="0.521,-0.705">
+            <Button.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform ScaleX="1" ScaleY="1"/>
+                    <SkewTransform/>
+                    <RotateTransform/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </Button.RenderTransform>
+            <Button.Template>
+                <ControlTemplate TargetType="Button">
+                    <Border CornerRadius="20" Background="{TemplateBinding Background}" Padding="5">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Button.Template>
+        </Button>
+
     </Grid>
 </Window>

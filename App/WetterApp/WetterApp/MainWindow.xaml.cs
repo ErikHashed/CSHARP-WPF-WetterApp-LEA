@@ -26,7 +26,7 @@ using System.Linq;
 
 namespace WetterApp
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window //Alle hotkey methoden haben wir von stackoverflow
     {
         public static string name = null;
 
@@ -100,10 +100,10 @@ namespace WetterApp
             return IntPtr.Zero;
         }
 
-      
+
 
         // Überschreiben von WndProc, um Nachrichten abzufangen
-        protected override void OnSourceInitialized(EventArgs e)
+        protected override void OnSourceInitialized(EventArgs e)//chatgpt
         {
             base.OnSourceInitialized(e);
             IntPtr handle = new WindowInteropHelper(this).Handle;
@@ -111,16 +111,16 @@ namespace WetterApp
             source.AddHook(HwndHook);
         }
 
-       
+
 
         [DllImport("user32.dll")]
-        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk);
+        private static extern bool RegisterHotKey(IntPtr hWnd, int id, uint fsModifiers, uint vk); 
 
         [DllImport("user32.dll")]
-        private static extern bool UnregisterHotKey(IntPtr hWnd, int id);
+        private static extern bool UnregisterHotKey(IntPtr hWnd, int id); 
 
 
-        public async void openAddWindow(object sender, RoutedEventArgs e)
+        public async void openAddWindow(object sender, RoutedEventArgs e)//selbst gemacht
         {
             InputDialog inputDialog = new InputDialog();
             inputDialog.ShowDialog();
@@ -259,7 +259,7 @@ namespace WetterApp
         }
 
 
-        void Rectangle_Click(object sender, RoutedEventArgs e)
+        void Rectangle_Click(object sender, RoutedEventArgs e)//selbst gemacht
         {
             Rectangle clickedRectangle = (Rectangle)sender;
             //Label nameLabel = ((Grid)clickedRectangle.Parent).Children[1] as Label;
@@ -270,7 +270,7 @@ namespace WetterApp
         }
 
         
-        async void LoadData()
+        async void LoadData()       //Selbst gemachte Methode
         {
             rectangleList.Items.Clear();
             try
@@ -437,9 +437,9 @@ namespace WetterApp
                     MessageBox.Show(ex.Message);
                 }
             }
-        }
+        }           
 
-        private void settingsButton_Click(object sender, RoutedEventArgs e)
+        private void settingsButton_Click(object sender, RoutedEventArgs e)//selbst gemacht
         {
 
             Settings settingsWindow = new Settings();
@@ -447,7 +447,7 @@ namespace WetterApp
             Close();
         }
 	    
-        void removeButton_Click(object sender, RoutedEventArgs e)
+        void removeButton_Click(object sender, RoutedEventArgs e)//selbst gemacht
         {
             Button btn = (Button)sender;
 
@@ -477,7 +477,7 @@ namespace WetterApp
             LoadData();
 		}
 
-        private void CloseButtonClick(object sender, RoutedEventArgs e)
+        private void CloseButtonClick(object sender, RoutedEventArgs e)//selbst gemacht
         {
             Close();
         }
