@@ -40,17 +40,21 @@ namespace WetterApp
 
         private void okClick(object sender, RoutedEventArgs e)
         {
-
+            try { 
             UserInput = inputTextBox.Text;
 
-            File.AppendAllText(citiesFilePath, UserInput );
+            File.AppendAllText(citiesFilePath, UserInput + "\n");
 
             MainWindow newWindow = new MainWindow();
             newWindow.Show();
 
 
             Close();
-
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
 
         }

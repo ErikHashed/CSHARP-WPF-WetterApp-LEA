@@ -144,52 +144,51 @@ namespace WetterApp
 
         }
 
-        
+
         async void LoadData()       //Selbst gemachte Methode
         {
-            rectangleList.Items.Clear();
-            try
-            {
-                if (File.Exists(Settings.SettingsFilePath))
-                {
-                    string[] settingsLines = File.ReadAllLines(Settings.SettingsFilePath);
-                    string[] parts;
-
-                    // Parse the lines and populate the AppSettings object
-
-                    parts = settingsLines[0].Split('=');
-                    if (parts.Length == 2)
-                    {
-                        Settings.ApiLanguage = parts[1];
-                    }
-                    parts = settingsLines[1].Split('=');
-                    if (parts.Length == 2)
-                    {
-                        Settings.MeasureUnit = parts[1];
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Settingsdatei nicht gefunden!");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error loading settings: {ex.Message}");
-            }
-
-            string[] lines = File.ReadAllLines(citiesFilePath);
-
-
            
 
-            for (int i = 0; i < lines.Length; i++)
-            {
-
-                bool cityExists = await CityExistsInAPI(lines[i]);
-
-                if (cityExists)
+                rectangleList.Items.Clear();
+                try
                 {
+                    if (File.Exists(Settings.SettingsFilePath))
+                    {
+                        string[] settingsLines = File.ReadAllLines(Settings.SettingsFilePath);
+                        string[] parts;
+
+                        // Parse the lines and populate the AppSettings object
+
+                        parts = settingsLines[0].Split('=');
+                        if (parts.Length == 2)
+                        {
+                            Settings.ApiLanguage = parts[1];
+                        }
+                        parts = settingsLines[1].Split('=');
+                        if (parts.Length == 2)
+                        {
+                            Settings.MeasureUnit = parts[1];
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Settingsdatei nicht gefunden!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                   MessageBox.Show(ex.Message);
+                }
+
+                string[] lines = File.ReadAllLines(citiesFilePath);
+
+
+
+
+                for (int i = 0; i < lines.Length; i++)
+                {
+
+
                     string url = $"https://api.weatherbit.io/v2.0/current?city={lines[i]}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
                     string forecastUrl = $"https://api.weatherbit.io/v2.0/forecast/daily?city={lines[i]}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
 
@@ -320,14 +319,19 @@ namespace WetterApp
                         MessageBox.Show(ex.Message);
                     }
 
-                }
-               
 
-               
-                
-               
-            }
-        }           
+
+
+
+
+
+
+                }
+            
+            
+            
+            
+}           
 
         private void settingsButton_Click(object sender, RoutedEventArgs e)//selbst gemacht
         {
@@ -372,25 +376,7 @@ namespace WetterApp
             Close();
         }
 
-        async Task<bool> CityExistsInAPI(string cityName)
-        {
-            string url = $"https://api.weatherbit.io/v2.0/current?city={cityName}&key={apiKey}&lang={Settings.ApiLanguage}&units={Settings.MeasureUnit}";
-
-            try
-            {
-                using (HttpClient client = new HttpClient())
-                {
-                    HttpResponseMessage response = await client.GetAsync(url);
-
-                    return response.IsSuccessStatusCode;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-                return false;
-            }
-        }
+       
 
     }
 }
